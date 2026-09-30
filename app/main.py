@@ -77,7 +77,7 @@ def create_app() -> FastAPI:
                 retry = int(60 - (now - q[0])) + 1
                 log.info("rate_limited", extra={"request_id": rid})
                 return JSONResponse(
-                    {"error": "rate_limited", "message": f"Too many searches. Try again in {retry} seconds.", "request_id": rid},
+                    {"error": "rate_limited", "message": f"Too many searches. Try again in {retry} second{'' if retry == 1 else 's'}.", "request_id": rid},
                     status_code=429, headers={"retry-after": str(retry), "x-request-id": rid},
                 )
             q.append(now)

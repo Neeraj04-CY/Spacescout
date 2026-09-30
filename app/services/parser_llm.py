@@ -71,7 +71,8 @@ Field rules:
 - duration_hours: only if the user states a length ("for 3 hours").
 - Amenities must use these keys only:
 {_AMENITY_LINES}
-  required_amenities: user says must/need/required/mandatory/"has to have".
+  required_amenities: user says must/need/required/mandatory/"has to have", or the amenity is the main thing asked for
+  ("anything with parking", "a room that has a projector").
   preferred_amenities: ideally/preferably/nice to have/if possible, or mentioned without insistence.
 - prefer_quiet: quiet, calm, silent, focus, peaceful. prefer_fast_wifi: fast/good/strong/high-speed internet or wifi.
   Taking calls usually means preferring phone_booth; video calls / Zoom / Meet usually means preferring video_conferencing.
