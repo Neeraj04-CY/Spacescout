@@ -2,6 +2,8 @@
 
 Type what you need, for example *"Quiet place for 4 people in Bandra tomorrow afternoon, fast wifi, under ₹600 per person per hour, ideally with a whiteboard"*, and get ranked results from a fixed set of listings. Each result says why it fits and what it trades off. Vague, conflicting or impossible requests get a clarifying question or the closest real alternatives, never invented listings.
 
+**Live demo: https://spacescout-h0z6.onrender.com**. It runs on Render's free tier, so the first load after 15 idle minutes takes about a minute while the server wakes up. API docs are at [`/docs`](https://spacescout-h0z6.onrender.com/docs), and [`/api/health`](https://spacescout-h0z6.onrender.com/api/health) shows the deployed commit.
+
 ![SpaceScout home](docs/screenshots/home.png)
 
 **Deliverables in this repo**

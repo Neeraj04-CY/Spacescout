@@ -75,6 +75,8 @@ class SearchService:
                 trace["llm_calls"].extend(m.as_dict() for m in metas)
                 return parsed
             except LLMError as e:
+                if e.meta is not None:
+                    trace["llm_calls"].append(e.meta.as_dict())
                 trace["parser"] = "rules (fallback)"
                 trace["fallback_reason"] = f"{type(e).__name__}: {e}"
                 log.warning("parser_fallback", extra={"reason": str(e)})

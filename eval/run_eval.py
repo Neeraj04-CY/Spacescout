@@ -137,13 +137,22 @@ def recorded_source(recorded: dict) -> str:
 def _replayed(rec: dict, data: dict) -> SearchResponse:
     """Rebuild a SearchResponse from a browser recording. Results carry listing ids; the
     recorder checked each returned listing against /api/listings and flagged differences."""
-    body = dict(rec["response"])
+    body = {"request_id": rec["id"], "interpretation": [], "suggestions": [], "message": None,
+            "clarifying_question": None, **rec["response"]}
+    item_defaults = {"score": {"fit": None, "trust": 0, "value": 0, "conversion": 0, "total": 0},
+                     "price_per_person_hour": None, "cost_in_budget_unit": None, "why": [], "tradeoffs": [],
+                     "violations": [], "available_slot": None, "explanation": "", "explanation_source": "template"}
     items = []
     for it in body["results"]:
         lst = data[it["listing_id"]]
         if not it.get("dataset_equal", False):
             lst = lst.model_copy(update={"name": lst.name + " [differs from dataset]"})
-        items.append({**{k: v for k, v in it.items() if k not in ("listing_id", "dataset_equal")}, "listing": lst})
+        item = {**item_defaults, **{k: v for k, v in it.items() if k not in ("listing_id", "dataset_equal")}, "listing": lst}
+        if item["explanation_source"] == "llm" and not item["explanation"]:
+            # Compact recordings omit explanation text; the server already ran the same
+            # grounding check and only labels text that passed as "llm".
+            item["explanation_source"] = "llm (grounding-checked on server)"
+        items.append(item)
     body["results"] = items
     return SearchResponse.model_validate(body)
 

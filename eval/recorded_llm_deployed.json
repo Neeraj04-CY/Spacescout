@@ -1,0 +1,1429 @@
+[
+ {
+  "id": "S1",
+  "latency_ms": 2900,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "ok",
+   "message": null,
+   "clarifying_question": null,
+   "total_exact_matches": 6,
+   "parsed": {
+    "location_text": "Bandra",
+    "party_size": 4,
+    "budget_amount": 600,
+    "budget_unit": "per_person_per_hour",
+    "day_kind": "tomorrow",
+    "time_of_day": "afternoon",
+    "preferred_amenities": [
+     "whiteboard"
+    ],
+    "prefer_quiet": true,
+    "prefer_fast_wifi": true
+   },
+   "trace": {
+    "parser": "llm:openai/gpt-oss-20b",
+    "llm_calls": [
+     {
+      "purpose": "parse",
+      "prompt_tokens": 1660,
+      "completion_tokens": 134,
+      "outcome": "ok"
+     },
+     {
+      "purpose": "explain",
+      "prompt_tokens": 741,
+      "completion_tokens": 1011,
+      "outcome": "ok"
+     }
+    ]
+   },
+   "results": [
+    {
+     "listing_id": "L001",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": 450,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L002",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": 525,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L004",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": 375,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L003",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": 575,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L006",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": 230,
+     "violations": [],
+     "explanation_source": "llm"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "S2",
+  "latency_ms": 1992,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "ok",
+   "message": null,
+   "clarifying_question": null,
+   "total_exact_matches": 3,
+   "parsed": {
+    "location_text": "BKC",
+    "party_size": 6,
+    "space_type": "meeting_room",
+    "day_kind": "tomorrow",
+    "time_of_day": "morning"
+   },
+   "trace": {
+    "parser": "llm:openai/gpt-oss-20b",
+    "llm_calls": [
+     {
+      "purpose": "parse",
+      "prompt_tokens": 1642,
+      "completion_tokens": 202,
+      "outcome": "ok"
+     },
+     {
+      "purpose": "explain",
+      "prompt_tokens": 512,
+      "completion_tokens": 146,
+      "outcome": "ok"
+     }
+    ]
+   },
+   "results": [
+    {
+     "listing_id": "L011",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L012",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L015",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "llm"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "S3",
+  "latency_ms": 1785,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "partial",
+   "message": "Only 2 spaces match everything. Close alternatives are shown below, with what they miss.",
+   "clarifying_question": null,
+   "total_exact_matches": 2,
+   "parsed": {
+    "location_text": "Andheri",
+    "space_type": "hot_desk",
+    "budget_amount": 200,
+    "budget_unit": "total_per_hour",
+    "day_kind": "today",
+    "required_amenities": [
+     "phone_booth"
+    ]
+   },
+   "trace": {
+    "parser": "llm:openai/gpt-oss-20b",
+    "llm_calls": [
+     {
+      "purpose": "parse",
+      "prompt_tokens": 1649,
+      "completion_tokens": 253,
+      "outcome": "ok"
+     },
+     {
+      "purpose": "explain",
+      "prompt_tokens": 647,
+      "completion_tokens": 611,
+      "outcome": "ok"
+     }
+    ]
+   },
+   "results": [
+    {
+     "listing_id": "L019",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": 140,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L020",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": 150,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L010",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 140,
+     "violations": [
+      "In Khar, 5.3 km from Andheri"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L027",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 140,
+     "violations": [
+      "In Powai, 6.2 km from Andheri"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L033",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 160,
+     "violations": [
+      "In Malad, 7.4 km from Andheri"
+     ],
+     "explanation_source": "llm"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "S4",
+  "latency_ms": 1764,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "partial",
+   "message": "Only 1 space matches everything. Close alternatives are shown below, with what they miss.",
+   "clarifying_question": null,
+   "total_exact_matches": 1,
+   "parsed": {
+    "location_text": "Powai",
+    "party_size": 3,
+    "space_type": "private_cabin",
+    "day_kind": "weekday",
+    "weekday": "friday",
+    "required_amenities": [
+     "whiteboard"
+    ]
+   },
+   "trace": {
+    "parser": "llm:openai/gpt-oss-20b",
+    "llm_calls": [
+     {
+      "purpose": "parse",
+      "prompt_tokens": 1648,
+      "completion_tokens": 213,
+      "outcome": "ok"
+     },
+     {
+      "purpose": "explain",
+      "prompt_tokens": 654,
+      "completion_tokens": 289,
+      "outcome": "ok"
+     }
+    ]
+   },
+   "results": [
+    {
+     "listing_id": "L026",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L027",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "Hot desk, not a private cabin",
+      "No whiteboard"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L025",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "Meeting room, not a private cabin",
+      "No whiteboard"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L028",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "Meeting room, not a private cabin",
+      "No whiteboard"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L018",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "In Andheri, 6.2 km from Powai"
+     ],
+     "explanation_source": "llm"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "S5",
+  "latency_ms": 1450,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "partial",
+   "message": "Only 1 space matches everything. Close alternatives are shown below, with what they miss.",
+   "clarifying_question": null,
+   "total_exact_matches": 1,
+   "parsed": {
+    "location_text": "Lower Parel",
+    "party_size": 10,
+    "space_type": "meeting_room",
+    "day_kind": "weekday",
+    "weekday": "friday",
+    "time_of_day": "afternoon",
+    "start_time": "14:00",
+    "end_time": "17:00",
+    "duration_hours": 3,
+    "required_amenities": [
+     "projector"
+    ]
+   },
+   "trace": {
+    "parser": "llm:openai/gpt-oss-20b",
+    "llm_calls": [
+     {
+      "purpose": "parse",
+      "prompt_tokens": 1655,
+      "completion_tokens": 223,
+      "outcome": "ok"
+     },
+     {
+      "purpose": "explain",
+      "prompt_tokens": 526,
+      "completion_tokens": 176,
+      "outcome": "ok"
+     }
+    ]
+   },
+   "results": [
+    {
+     "listing_id": "L022",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L024",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "Hot desk, not a meeting room",
+      "No projector"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L021",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "Seats only 6, you need 10",
+      "No projector"
+     ],
+     "explanation_source": "llm"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "S6",
+  "latency_ms": 1614,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "partial",
+   "message": "Only 1 space matches everything. Close alternatives are shown below, with what they miss.",
+   "clarifying_question": null,
+   "total_exact_matches": 1,
+   "parsed": {
+    "location_text": "Khar",
+    "party_size": 2,
+    "space_type": "private_cabin",
+    "budget_amount": 1200,
+    "budget_unit": "total_per_hour",
+    "day_kind": "tomorrow",
+    "time_of_day": "evening",
+    "duration_hours": 3,
+    "prefer_quiet": true
+   },
+   "trace": {
+    "parser": "llm:openai/gpt-oss-20b",
+    "llm_calls": [
+     {
+      "purpose": "parse",
+      "prompt_tokens": 1654,
+      "completion_tokens": 245,
+      "outcome": "ok"
+     },
+     {
+      "purpose": "explain",
+      "prompt_tokens": 746,
+      "completion_tokens": 381,
+      "outcome": "ok"
+     }
+    ]
+   },
+   "results": [
+    {
+     "listing_id": "L009",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": 950,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L005",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 900,
+     "violations": [
+      "In Bandra, 1.6 km from Khar"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L008",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 1150,
+     "violations": [
+      "Meeting room, not a private cabin"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L010",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 280,
+     "violations": [
+      "Hot desk, not a private cabin"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L004",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 1500,
+     "violations": [
+      "In Bandra, 1.6 km from Khar",
+      "₹1,500/hr: ₹300 over your ₹1,200/hr"
+     ],
+     "explanation_source": "llm"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "S7",
+  "latency_ms": 1897,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "no_exact_match",
+   "message": "No space matches everything you asked for. 5 spaces fit if you can go to Lower Parel (7.1 km), Bandra (14.0 km), BKC (15.0 km).",
+   "clarifying_question": "Would a nearby area work for you?",
+   "total_exact_matches": 0,
+   "parsed": {
+    "location_text": "Fort",
+    "party_size": 8,
+    "day_kind": "weekday",
+    "weekday": "thursday",
+    "time_of_day": "full_day",
+    "required_amenities": [
+     "video_conferencing"
+    ]
+   },
+   "trace": {
+    "parser": "llm:openai/gpt-oss-20b",
+    "llm_calls": [
+     {
+      "purpose": "parse",
+      "prompt_tokens": 1646,
+      "completion_tokens": 217,
+      "outcome": "ok"
+     },
+     {
+      "purpose": "explain",
+      "prompt_tokens": 680,
+      "completion_tokens": 323,
+      "outcome": "ok"
+     }
+    ]
+   },
+   "results": [
+    {
+     "listing_id": "L031",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "No video-conferencing setup"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L030",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "Open 10:00–22:00, so a 9h slot doesn't fit your time; free Thu 08 Oct, 10:00–22:00 instead"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L022",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "In Lower Parel, 7.1 km from Fort"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L029",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "Seats only 4, you need 8",
+      "No video-conferencing setup"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L024",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "In Lower Parel, 7.1 km from Fort",
+      "No video-conferencing setup"
+     ],
+     "explanation_source": "llm"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "S8",
+  "latency_ms": 1557,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "ok",
+   "message": null,
+   "clarifying_question": null,
+   "total_exact_matches": 4,
+   "parsed": {
+    "location_text": "Vashi",
+    "party_size": 1,
+    "day_kind": "tomorrow",
+    "time_of_day": "morning"
+   },
+   "trace": {
+    "parser": "llm:openai/gpt-oss-20b",
+    "llm_calls": [
+     {
+      "purpose": "parse",
+      "prompt_tokens": 1642,
+      "completion_tokens": 210,
+      "outcome": "ok"
+     },
+     {
+      "purpose": "explain",
+      "prompt_tokens": 556,
+      "completion_tokens": 194,
+      "outcome": "ok"
+     }
+    ]
+   },
+   "results": [
+    {
+     "listing_id": "L038",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L040",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L039",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L037",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "llm"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "S9",
+  "latency_ms": 1627,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "partial",
+   "message": "Only 2 spaces match everything. Close alternatives are shown below, with what they miss.",
+   "clarifying_question": null,
+   "total_exact_matches": 2,
+   "parsed": {
+    "location_text": "Andheri",
+    "party_size": 4,
+    "space_type": "meeting_room",
+    "required_amenities": [
+     "whiteboard"
+    ],
+    "min_rating": 4
+   },
+   "trace": {
+    "parser": "llm:openai/gpt-oss-20b",
+    "llm_calls": [
+     {
+      "purpose": "parse",
+      "prompt_tokens": 1647,
+      "completion_tokens": 212,
+      "outcome": "ok"
+     },
+     {
+      "purpose": "explain",
+      "prompt_tokens": 661,
+      "completion_tokens": 277,
+      "outcome": "ok"
+     }
+    ]
+   },
+   "results": [
+    {
+     "listing_id": "L017",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L016",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L018",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "Private cabin, not a meeting room"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L035",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "In Goregaon, 5.2 km from Andheri"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L019",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "Hot desk, not a meeting room",
+      "No whiteboard"
+     ],
+     "explanation_source": "llm"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "S10",
+  "latency_ms": 2385,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "ok",
+   "message": null,
+   "clarifying_question": null,
+   "total_exact_matches": 5,
+   "parsed": {
+    "location_text": "Malad or Goregaon",
+    "party_size": 5,
+    "day_kind": "weekday",
+    "weekday": "wednesday",
+    "time_of_day": "afternoon"
+   },
+   "trace": {
+    "parser": "llm:openai/gpt-oss-20b",
+    "llm_calls": [
+     {
+      "purpose": "parse",
+      "prompt_tokens": 1647,
+      "completion_tokens": 212,
+      "outcome": "ok"
+     },
+     {
+      "purpose": "explain",
+      "prompt_tokens": 604,
+      "completion_tokens": 245,
+      "outcome": "ok"
+     }
+    ]
+   },
+   "results": [
+    {
+     "listing_id": "L036",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L032",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L033",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L035",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L034",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "llm"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "S11",
+  "latency_ms": 2164,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "no_exact_match",
+   "message": "No space matches everything you asked for. Everything else fits 2 spaces, but the cheapest is ₹18,700/day against your ₹5,000/day.",
+   "clarifying_question": "Could you stretch the budget, or would a smaller or cheaper space work?",
+   "total_exact_matches": 0,
+   "parsed": {
+    "location_text": "BKC",
+    "party_size": 12,
+    "space_type": "meeting_room",
+    "budget_amount": 5000,
+    "budget_unit": "total_per_day",
+    "day_kind": "day_after_tomorrow"
+   },
+   "trace": {
+    "parser": "llm:openai/gpt-oss-20b",
+    "llm_calls": [
+     {
+      "purpose": "parse",
+      "prompt_tokens": 1651,
+      "completion_tokens": 220,
+      "outcome": "ok"
+     },
+     {
+      "purpose": "explain",
+      "prompt_tokens": 578,
+      "completion_tokens": 201,
+      "outcome": "ok"
+     }
+    ]
+   },
+   "results": [
+    {
+     "listing_id": "L014",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 9000,
+     "violations": [
+      "Hot desk, not a meeting room",
+      "₹9,000/day: ₹4,000 over your ₹5,000/day"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L012",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 18700,
+     "violations": [
+      "₹18,700/day: ₹13,700 over your ₹5,000/day"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L015",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 36900,
+     "violations": [
+      "₹36,900/day: ₹31,900 over your ₹5,000/day"
+     ],
+     "explanation_source": "llm"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "S12",
+  "latency_ms": 2262,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "partial",
+   "message": "Only 1 space matches everything. Close alternatives are shown below, with what they miss.",
+   "clarifying_question": null,
+   "total_exact_matches": 1,
+   "parsed": {
+    "location_text": "Bandra",
+    "party_size": 1,
+    "budget_amount": 300,
+    "budget_unit": "total_per_hour",
+    "prefer_quiet": true,
+    "prefer_fast_wifi": true
+   },
+   "trace": {
+    "parser": "llm:openai/gpt-oss-20b",
+    "llm_calls": [
+     {
+      "purpose": "parse",
+      "prompt_tokens": 1650,
+      "completion_tokens": 235,
+      "outcome": "ok"
+     },
+     {
+      "purpose": "explain",
+      "prompt_tokens": 662,
+      "completion_tokens": 583,
+      "outcome": "ok"
+     }
+    ]
+   },
+   "results": [
+    {
+     "listing_id": "L006",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": 230,
+     "violations": [],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L010",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 140,
+     "violations": [
+      "In Khar, 1.6 km from Bandra"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L014",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 150,
+     "violations": [
+      "In BKC, 3.9 km from Bandra"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L020",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 150,
+     "violations": [
+      "In Andheri, 6.9 km from Bandra"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L019",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 140,
+     "violations": [
+      "In Andheri, 6.9 km from Bandra"
+     ],
+     "explanation_source": "llm"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "M1",
+  "latency_ms": 1111,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "needs_clarification",
+   "message": "That's a bit open-ended, so I haven't ranked anything for you yet.",
+   "clarifying_question": "Where in Mumbai, for how many people, and when? Any must-haves (quiet, whiteboard, budget)?",
+   "total_exact_matches": 0,
+   "parsed": {},
+   "trace": {
+    "parser": "llm:openai/gpt-oss-20b",
+    "llm_calls": [
+     {
+      "purpose": "parse",
+      "prompt_tokens": 1637,
+      "completion_tokens": 148,
+      "outcome": "ok"
+     }
+    ]
+   },
+   "results": [
+    {
+     "listing_id": "L040",
+     "dataset_equal": true,
+     "match": "suggestion",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "template"
+    },
+    {
+     "listing_id": "L022",
+     "dataset_equal": true,
+     "match": "suggestion",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "template"
+    },
+    {
+     "listing_id": "L014",
+     "dataset_equal": true,
+     "match": "suggestion",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "template"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "M2",
+  "latency_ms": 2967,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "no_exact_match",
+   "message": "No space matches everything you asked for. No space in our listings fits 50 people; the largest (Basalt Studio BKC) fits 40. 4 spaces fit everything except group size.",
+   "clarifying_question": "Could you split the group, or is a larger budget possible?",
+   "total_exact_matches": 0,
+   "parsed": {
+    "location_text": "Bandra",
+    "party_size": 50,
+    "space_type": "meeting_room",
+    "budget_amount": 200,
+    "budget_unit": "per_person_per_hour"
+   },
+   "trace": {
+    "parser": "llm:openai/gpt-oss-20b",
+    "llm_calls": [
+     {
+      "purpose": "parse",
+      "prompt_tokens": 1648,
+      "completion_tokens": 218,
+      "outcome": "ok"
+     },
+     {
+      "purpose": "explain",
+      "prompt_tokens": 504,
+      "completion_tokens": 770,
+      "outcome": "ok"
+     }
+    ]
+   },
+   "results": [
+    {
+     "listing_id": "L007",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 47,
+     "violations": [
+      "Seats only 10, you need 50"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L003",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 46,
+     "violations": [
+      "Seats only 8, you need 50"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L002",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 42,
+     "violations": [
+      "Seats only 6, you need 50"
+     ],
+     "explanation_source": "llm"
+    },
+    {
+     "listing_id": "L001",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 36,
+     "violations": [
+      "Seats only 4, you need 50"
+     ],
+     "explanation_source": "llm"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "M3",
+  "latency_ms": 966,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "no_exact_match",
+   "message": "No space matches everything you asked for. 8 spaces fit if you can go to Andheri (2.5 km), Khar (4.0 km), Bandra (5.3 km).",
+   "clarifying_question": "Would a nearby area work for you?",
+   "total_exact_matches": 0,
+   "parsed": {
+    "location_text": "juhu",
+    "party_size": 3,
+    "space_type": "private_cabin",
+    "day_kind": "tomorrow",
+    "time_of_day": "morning"
+   },
+   "trace": {
+    "parser": "rules (fallback)",
+    "fallback_reason": "LLMUnavailable: http 429",
+    "llm_calls": []
+   },
+   "results": [
+    {
+     "listing_id": "L018",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "In Andheri, 2.5 km from Juhu"
+     ],
+     "explanation_source": "template"
+    },
+    {
+     "listing_id": "L009",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "In Khar, 4.0 km from Juhu"
+     ],
+     "explanation_source": "template"
+    },
+    {
+     "listing_id": "L004",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "In Bandra, 5.3 km from Juhu"
+     ],
+     "explanation_source": "template"
+    },
+    {
+     "listing_id": "L019",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "In Andheri, 2.5 km from Juhu",
+      "Hot desk, not a private cabin"
+     ],
+     "explanation_source": "template"
+    },
+    {
+     "listing_id": "L020",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "In Andheri, 2.5 km from Juhu",
+      "Hot desk, not a private cabin"
+     ],
+     "explanation_source": "template"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "M4",
+  "latency_ms": 800,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "needs_clarification",
+   "message": "We only list spaces in Mumbai right now, so I can't search Pune.",
+   "clarifying_question": "Would a Mumbai area work? We cover Andheri, BKC, Bandra, Fort, Goregaon, Khar, Lower Parel, Malad, Powai, Vashi.",
+   "total_exact_matches": 0,
+   "parsed": {
+    "location_text": "pune",
+    "party_size": 2,
+    "space_type": "private_cabin"
+   },
+   "trace": {
+    "parser": "rules (fallback)",
+    "fallback_reason": "LLMUnavailable: rate-limited, cooling down 694s",
+    "llm_calls": []
+   },
+   "results": []
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "M5",
+  "latency_ms": 301,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "no_exact_match",
+   "message": "No space matches everything you asked for. No listing is free. The cheapest that fits everything else is ₹230/hr.",
+   "clarifying_question": "Could you stretch the budget, or would a smaller or cheaper space work?",
+   "total_exact_matches": 0,
+   "parsed": {
+    "location_text": "bandra",
+    "space_type": "hot_desk",
+    "budget_amount": 0,
+    "budget_unit": "total_per_hour",
+    "unsupported_requests": [
+     "pool",
+     "rooftop"
+    ]
+   },
+   "trace": {
+    "parser": "rules (fallback)",
+    "fallback_reason": "LLMUnavailable: rate-limited, cooling down 664s",
+    "llm_calls": []
+   },
+   "results": [
+    {
+     "listing_id": "L006",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 230,
+     "violations": [
+      "Costs ₹230/hr, not free"
+     ],
+     "explanation_source": "template"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "M6",
+  "latency_ms": 743,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "partial",
+   "message": "Only 2 spaces match everything. Close alternatives are shown below, with what they miss.",
+   "clarifying_question": null,
+   "total_exact_matches": 2,
+   "parsed": {
+    "location_text": "andheri",
+    "space_type": "meeting_room",
+    "prefer_quiet": true
+   },
+   "trace": {
+    "parser": "rules (fallback)",
+    "fallback_reason": "LLMUnavailable: rate-limited, cooling down 632s",
+    "llm_calls": []
+   },
+   "results": [
+    {
+     "listing_id": "L016",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "template"
+    },
+    {
+     "listing_id": "L017",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "template"
+    },
+    {
+     "listing_id": "L018",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "Private cabin, not a meeting room"
+     ],
+     "explanation_source": "template"
+    },
+    {
+     "listing_id": "L020",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "Hot desk, not a meeting room"
+     ],
+     "explanation_source": "template"
+    },
+    {
+     "listing_id": "L019",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": null,
+     "violations": [
+      "Hot desk, not a meeting room"
+     ],
+     "explanation_source": "template"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "M7",
+  "latency_ms": 763,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "ok",
+   "message": null,
+   "clarifying_question": null,
+   "total_exact_matches": 4,
+   "parsed": {
+    "location_text": "bandraa",
+    "party_size": 6,
+    "day_kind": "tomorrow"
+   },
+   "trace": {
+    "parser": "rules (fallback)",
+    "fallback_reason": "LLMUnavailable: rate-limited, cooling down 601s",
+    "llm_calls": []
+   },
+   "results": [
+    {
+     "listing_id": "L006",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "template"
+    },
+    {
+     "listing_id": "L002",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "template"
+    },
+    {
+     "listing_id": "L007",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "template"
+    },
+    {
+     "listing_id": "L003",
+     "dataset_equal": true,
+     "match": "exact",
+     "cost_in_budget_unit": null,
+     "violations": [],
+     "explanation_source": "template"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "M8",
+  "latency_ms": 808,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "no_exact_match",
+   "message": "No space matches everything you asked for. Everything else fits 1 space, but the cheapest is ₹140/person/hr against your ₹50/person/hr.",
+   "clarifying_question": "Could you stretch the budget, or would a smaller or cheaper space work?",
+   "total_exact_matches": 0,
+   "parsed": {
+    "location_text": "powai",
+    "party_size": 20,
+    "space_type": "hot_desk",
+    "budget_amount": 50,
+    "budget_unit": "per_person_per_hour",
+    "prefer_quiet": true
+   },
+   "trace": {
+    "parser": "rules (fallback)",
+    "fallback_reason": "LLMUnavailable: rate-limited, cooling down 570s",
+    "llm_calls": []
+   },
+   "results": [
+    {
+     "listing_id": "L027",
+     "dataset_equal": true,
+     "match": "alternative",
+     "cost_in_budget_unit": 140,
+     "violations": [
+      "₹140/person/hr: ₹90 over your ₹50/person/hr"
+     ],
+     "explanation_source": "template"
+    }
+   ]
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ },
+ {
+  "id": "M9",
+  "latency_ms": 753,
+  "version": "722e09e0208a",
+  "response": {
+   "status": "needs_clarification",
+   "message": "I can only help find desks, meeting rooms and private cabins in Mumbai.",
+   "clarifying_question": "What kind of space do you need, where, and for how many people?",
+   "total_exact_matches": 0,
+   "parsed": {
+    "off_topic": true
+   },
+   "trace": {
+    "parser": "rules (fallback)",
+    "fallback_reason": "LLMUnavailable: rate-limited, cooling down 539s",
+    "llm_calls": []
+   },
+   "results": []
+  },
+  "origin": "https://spacescout-h0z6.onrender.com"
+ }
+]

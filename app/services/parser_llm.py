@@ -61,7 +61,8 @@ Field rules:
 - location_text: the place exactly as the user wrote it (e.g. "Bandra", "near BKC", "Andheri or Powai"). null if none.
 - party_size: number of people. "just me"/"solo" = 1. null if not stated. Never guess.
 - space_type: hot_desk (a desk/seat), meeting_room (meeting/conference/discussion room), private_cabin (private office/cabin).
-  Only set it when the user names the kind of space. Do not infer it from group size or activity ("client pitch", "just me"): use null.
+  Set it when the user names the kind of space ("a desk just for me" -> hot_desk). Do not infer it from group size or
+  activity alone ("a spot for a client pitch", "somewhere for just me"): use null.
 - budget_amount + budget_unit: "under 600 per person per hour" -> 600, per_person_per_hour. "5k for the day" -> 5000, total_per_day.
   "each"/"per head"/"pp" means per person. No time unit -> per hour. No person unit -> total. null if no budget.
   "free" -> 0.

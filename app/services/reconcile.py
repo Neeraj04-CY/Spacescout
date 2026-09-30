@@ -38,6 +38,13 @@ _SPACE_EVIDENCE = {
 }
 
 
+_NAMED_SPACE = {
+    "hot_desk": re.compile(r"\b(desk|hot[- ]desk|seat|workstation)\b"),
+    "meeting_room": re.compile(r"\b(meeting room|conference room|board ?room|discussion room)\b"),
+    "private_cabin": re.compile(r"\b(cabin|private office)\b"),
+}
+
+
 def _weekday_in(text: str) -> str | None:
     for wd in WEEKDAYS:
         if re.search(rf"\b({wd}|{wd[:3]})\b", text):
@@ -97,5 +104,11 @@ def reconcile(parsed: ParsedQuery, query: str) -> tuple[ParsedQuery, list[str]]:
     if p.space_type and not _SPACE_EVIDENCE[p.space_type].search(t):
         p.space_type = None
         notes.append("Space type not stated, so desks, rooms and cabins are all considered")
+    elif p.space_type is None:
+        # The user named exactly one kind of space but the parser left it out
+        # ("a desk just for me"): use the user's own word.
+        named = [k for k, rx in _NAMED_SPACE.items() if rx.search(t)]
+        if len(named) == 1:
+            p.space_type = named[0]
 
     return ParsedQuery.model_validate(p.model_dump()), notes

@@ -13,7 +13,7 @@ Reference time: 2026-10-05T10:00:00+05:30 (Monday). Model: n/a (rule-based). Gen
 | Parsed fields correct | 95/99 (96%) |
 | Grounding violations (result not in dataset, or LLM text with unsupported facts) | 0 |
 | LLM parser fallbacks to rules | 0 |
-| Latency per query, median / max (ms) | 2 / 8 |
+| Latency per query, median / max (ms) | 2 / 12 |
 
 ## Per-query results
 

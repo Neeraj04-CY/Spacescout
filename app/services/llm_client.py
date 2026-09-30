@@ -22,7 +22,11 @@ log = logging.getLogger("spacescout.llm")
 
 
 class LLMError(Exception):
-    """Base class for LLM failures. Callers fall back to deterministic code."""
+    """Base class for LLM failures. Callers fall back to deterministic code.
+
+    `meta` (when set) is the CallMeta of the failed call, so the trace can show it."""
+
+    meta: "CallMeta | None" = None
 
 
 class LLMUnavailable(LLMError):
@@ -84,7 +88,9 @@ class LLMClient:
         remaining = self._cooldown_until - time.monotonic()
         if remaining > 0:
             meta.outcome = f"skipped: provider rate limit, cooling down {remaining:.0f}s"
-            raise LLMUnavailable(f"rate-limited, cooling down {remaining:.0f}s")
+            err = LLMUnavailable(f"rate-limited, cooling down {remaining:.0f}s")
+            err.meta = meta
+            raise err
 
         strict = self.s.llm_strict_schema
         started = time.perf_counter()
@@ -131,7 +137,9 @@ class LLMClient:
                 if resp.status_code in (401, 403):
                     meta.outcome = f"auth error {resp.status_code}"
                     meta.latency_ms = round((time.perf_counter() - started) * 1000, 1)
-                    raise LLMUnavailable(f"authentication failed ({resp.status_code})")
+                    err = LLMUnavailable(f"authentication failed ({resp.status_code})")
+                    err.meta = meta
+                    raise err
                 if resp.status_code in RETRYABLE_STATUS:
                     meta.errors.append(f"http {resp.status_code}")
                     last_err = LLMUnavailable(f"http {resp.status_code}")
@@ -171,6 +179,6 @@ class LLMClient:
         meta.latency_ms = round((time.perf_counter() - started) * 1000, 1)
         meta.outcome = f"failed: {last_err}"
         log.warning("llm_call_failed", extra={"llm": meta.as_dict()})
-        if isinstance(last_err, LLMError):
-            raise last_err
-        raise LLMUnavailable(str(last_err))
+        err = last_err if isinstance(last_err, LLMError) else LLMUnavailable(str(last_err))
+        err.meta = meta
+        raise err

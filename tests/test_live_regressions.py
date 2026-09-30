@@ -81,3 +81,11 @@ def test_amenity_phrase_keeps_acronyms():
     assert amenity_phrase("tv_screen").startswith("TV")
     assert amenity_phrase("whiteboard") == "whiteboard"
     assert amenity_phrase("access_24x7") == "24x7 access"
+
+
+def test_named_space_type_is_restored():
+    # Deployed eval S8: the LLM dropped "desk" from "A desk just for me in Vashi".
+    p, _ = reconcile(ParsedQuery(), "A desk just for me in Vashi tomorrow morning")
+    assert p.space_type == "hot_desk"
+    p, _ = reconcile(ParsedQuery(), "a desk or a cabin in Khar")  # two types named: leave it open
+    assert p.space_type is None
