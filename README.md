@@ -11,9 +11,9 @@ Type what you need, for example *"Quiet place for 4 people in Bandra tomorrow af
 | Assignment deliverable | Where |
 |---|---|
 | Working prototype (web UI) + run instructions | `app/`, `static/`, this README |
-| Design note (1-2 pages) | [`DESIGN_NOTE.md`](DESIGN_NOTE.md) |
+| Design note (1-2 pages) | [`DESIGN_NOTE.md`](DESIGN_NOTE.md) (PDF: [`docs/SpaceScout_Design_Note.pdf`](docs/SpaceScout_Design_Note.pdf)) |
 | Evaluation (21 queries, 9 messy/adversarial), rule-based and LLM runs | [`EVALUATION.md`](EVALUATION.md), `eval/` |
-| Reflection (three shipping risks) | [`REFLECTION.md`](REFLECTION.md) |
+| Reflection (three shipping risks) | [`REFLECTION.md`](REFLECTION.md) (PDF: [`docs/SpaceScout_Reflection.pdf`](docs/SpaceScout_Reflection.pdf)) |
 
 ## Run it
 

@@ -8,7 +8,8 @@
 
 - The LLM never touches listing data. Results, prices and amenities come from the dataset only; a test asserts every returned listing is byte-identical to its dataset record.
 - Explanations are built from a per-listing fact sheet. LLM rephrasing is accepted only if every number, amenity and noise claim appears in those facts, otherwise the template is used. Tests cover both paths.
-- The "Understood as" chips show exactly how the request was read, including assumptions ("Budget unit unclear, treated as total per hour"). A misparse is visible before the user books.
+- Hard constraints the LLM adds must be backed by the user's words (`reconcile.py`). An invented date, an unstated per-day or per-person budget, or an inferred space type is relaxed and shown as an assumption, never silently applied.
+- The "What I understood" panel shows exactly how the request was read, including assumptions ("Budget read as total per hour, since no other unit was stated"). A misparse is visible before the user books.
 - Next: make the chips editable, run the evaluation set in CI on every prompt or model change, and review logged queries where users immediately rephrase, which is a cheap misparse signal.
 
 ## 2. Ranking drifts toward expensive or already-popular listings

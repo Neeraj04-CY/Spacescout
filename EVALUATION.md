@@ -157,7 +157,7 @@ Caveat: some of these fixes also change results for queries in the evaluation se
 
 ## Automated tests
 
-`pytest` runs 53 tests: unit, service, failure-mode and HTTP (`tests/test_api.py`). The LLM is mocked with `httpx.MockTransport` to exercise:
+`pytest` runs the unit, service, failure-mode, live-regression and HTTP tests (`tests/`). The LLM is mocked with `httpx.MockTransport` to exercise:
 
 - malformed JSON
 - a 429 followed by success
