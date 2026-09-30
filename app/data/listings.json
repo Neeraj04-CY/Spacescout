@@ -1,0 +1,1808 @@
+[
+  {
+    "id": "L001",
+    "name": "Tide Commons Bandra",
+    "space_type": "meeting_room",
+    "area": "bandra",
+    "address": "7th floor, 36 Waterfield Lane, Bandra, Mumbai",
+    "capacity": 4,
+    "pricing": "per_room",
+    "price_per_hour": 1800,
+    "price_per_day": 12200,
+    "noise_level": "quiet",
+    "wifi_mbps": 300,
+    "amenities": [
+      "access_24x7",
+      "parking",
+      "power_backup",
+      "projector",
+      "video_conferencing",
+      "whiteboard"
+    ],
+    "rating": 4.6,
+    "review_count": 212,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "00:00",
+    "close_time": "23:59",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          0,
+          1,
+          4
+        ],
+        "start": "11:00",
+        "end": "13:00"
+      }
+    ],
+    "description": "Quiet meeting room for up to 4 people on the 7th floor in Bandra."
+  },
+  {
+    "id": "L002",
+    "name": "Sandstone Loft Bandra",
+    "space_type": "meeting_room",
+    "area": "bandra",
+    "address": "7th floor, 71 Waterfield Lane, Bandra, Mumbai",
+    "capacity": 6,
+    "pricing": "per_room",
+    "price_per_hour": 2100,
+    "price_per_day": 14300,
+    "noise_level": "quiet",
+    "wifi_mbps": 200,
+    "amenities": [
+      "projector",
+      "tv_screen"
+    ],
+    "rating": 4.8,
+    "review_count": 96,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "open_time": "08:00",
+    "close_time": "20:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          0,
+          3,
+          4
+        ],
+        "start": "10:00",
+        "end": "13:00"
+      }
+    ],
+    "description": "Quiet meeting room for up to 6 people on the 7th floor in Bandra."
+  },
+  {
+    "id": "L003",
+    "name": "Harbour Loft Bandra",
+    "space_type": "meeting_room",
+    "area": "bandra",
+    "address": "4th floor, 24 Chapel Row, Bandra, Mumbai",
+    "capacity": 8,
+    "pricing": "per_room",
+    "price_per_hour": 2300,
+    "price_per_day": 15600,
+    "noise_level": "moderate",
+    "wifi_mbps": 150,
+    "amenities": [
+      "coffee",
+      "natural_light",
+      "pantry",
+      "parking",
+      "phone_booth",
+      "tv_screen",
+      "video_conferencing",
+      "whiteboard"
+    ],
+    "rating": 4.1,
+    "review_count": 58,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "08:00",
+    "close_time": "20:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          0,
+          2,
+          4
+        ],
+        "start": "15:00",
+        "end": "17:00"
+      }
+    ],
+    "description": "Moderately busy meeting room for up to 8 people on the 4th floor in Bandra."
+  },
+  {
+    "id": "L004",
+    "name": "Basalt Commons Bandra",
+    "space_type": "private_cabin",
+    "area": "bandra",
+    "address": "3rd floor, 82 Chapel Row, Bandra, Mumbai",
+    "capacity": 4,
+    "pricing": "per_room",
+    "price_per_hour": 1500,
+    "price_per_day": 10200,
+    "noise_level": "quiet",
+    "wifi_mbps": 50,
+    "amenities": [
+      "natural_light",
+      "pantry",
+      "power_backup",
+      "printer",
+      "whiteboard"
+    ],
+    "rating": 4.3,
+    "review_count": 41,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "open_time": "08:00",
+    "close_time": "20:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          0
+        ],
+        "start": "12:00",
+        "end": "14:00"
+      },
+      {
+        "weekdays": [
+          2
+        ],
+        "start": "11:00",
+        "end": "14:00"
+      }
+    ],
+    "description": "Quiet private cabin for up to 4 people on the 3rd floor in Bandra."
+  },
+  {
+    "id": "L005",
+    "name": "Kora Studio Bandra",
+    "space_type": "private_cabin",
+    "area": "bandra",
+    "address": "5th floor, 81 Waterfield Lane, Bandra, Mumbai",
+    "capacity": 2,
+    "pricing": "per_room",
+    "price_per_hour": 900,
+    "price_per_day": 5900,
+    "noise_level": "quiet",
+    "wifi_mbps": 500,
+    "amenities": [
+      "coffee",
+      "natural_light",
+      "pantry",
+      "power_backup",
+      "tv_screen",
+      "wheelchair_accessible"
+    ],
+    "rating": 4.1,
+    "review_count": 252,
+    "instant_book": false,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "09:00",
+    "close_time": "21:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          4
+        ],
+        "start": "11:00",
+        "end": "13:00"
+      }
+    ],
+    "description": "Quiet private cabin for up to 2 people on the 5th floor in Bandra."
+  },
+  {
+    "id": "L006",
+    "name": "Ferry Studio Bandra",
+    "space_type": "hot_desk",
+    "area": "bandra",
+    "address": "7th floor, 19 Chapel Row, Bandra, Mumbai",
+    "capacity": 20,
+    "pricing": "per_seat",
+    "price_per_hour": 230,
+    "price_per_day": 1500,
+    "noise_level": "lively",
+    "wifi_mbps": 75,
+    "amenities": [
+      "coffee",
+      "lockers",
+      "pantry",
+      "phone_booth",
+      "power_backup",
+      "wheelchair_accessible"
+    ],
+    "rating": 4.6,
+    "review_count": 138,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "open_time": "08:00",
+    "close_time": "22:00",
+    "recurring_bookings": [],
+    "description": "Lively, social hot-desk floor for up to 20 people on the 7th floor in Bandra."
+  },
+  {
+    "id": "L007",
+    "name": "Loom Commons Bandra",
+    "space_type": "meeting_room",
+    "area": "bandra",
+    "address": "4th floor, 38 Waterfield Lane, Bandra, Mumbai",
+    "capacity": 10,
+    "pricing": "per_room",
+    "price_per_hour": 2350,
+    "price_per_day": 16700,
+    "noise_level": "moderate",
+    "wifi_mbps": 50,
+    "amenities": [
+      "pantry",
+      "parking",
+      "phone_booth",
+      "whiteboard"
+    ],
+    "rating": 4.3,
+    "review_count": 76,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "10:00",
+    "close_time": "22:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          0,
+          1,
+          4
+        ],
+        "start": "16:00",
+        "end": "18:00"
+      },
+      {
+        "weekdays": [
+          4
+        ],
+        "start": "12:00",
+        "end": "14:00"
+      },
+      {
+        "weekdays": [
+          3
+        ],
+        "start": "13:00",
+        "end": "15:00"
+      }
+    ],
+    "description": "Moderately busy meeting room for up to 10 people on the 4th floor in Bandra."
+  },
+  {
+    "id": "L008",
+    "name": "Ember Studio Khar",
+    "space_type": "meeting_room",
+    "area": "khar",
+    "address": "9th floor, 23 16th Cross Road, Khar, Mumbai",
+    "capacity": 4,
+    "pricing": "per_room",
+    "price_per_hour": 1150,
+    "price_per_day": 7800,
+    "noise_level": "quiet",
+    "wifi_mbps": 50,
+    "amenities": [
+      "access_24x7",
+      "coffee",
+      "natural_light",
+      "power_backup"
+    ],
+    "rating": 5.0,
+    "review_count": 3,
+    "instant_book": false,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "00:00",
+    "close_time": "23:59",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          3
+        ],
+        "start": "11:00",
+        "end": "14:00"
+      },
+      {
+        "weekdays": [
+          1,
+          3
+        ],
+        "start": "11:00",
+        "end": "13:00"
+      }
+    ],
+    "description": "Quiet meeting room for up to 4 people on the 9th floor in Khar."
+  },
+  {
+    "id": "L009",
+    "name": "Anchor Collective Khar",
+    "space_type": "private_cabin",
+    "area": "khar",
+    "address": "7th floor, 44 16th Cross Road, Khar, Mumbai",
+    "capacity": 3,
+    "pricing": "per_room",
+    "price_per_hour": 950,
+    "price_per_day": 6600,
+    "noise_level": "quiet",
+    "wifi_mbps": 300,
+    "amenities": [
+      "coffee",
+      "lockers",
+      "natural_light",
+      "pantry",
+      "power_backup",
+      "video_conferencing",
+      "wheelchair_accessible",
+      "whiteboard"
+    ],
+    "rating": 3.6,
+    "review_count": 68,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "open_time": "08:00",
+    "close_time": "20:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          0,
+          2,
+          3
+        ],
+        "start": "16:00",
+        "end": "19:00"
+      }
+    ],
+    "description": "Quiet private cabin for up to 3 people on the 7th floor in Khar."
+  },
+  {
+    "id": "L010",
+    "name": "Kora Works Khar",
+    "space_type": "hot_desk",
+    "area": "khar",
+    "address": "3rd floor, 23 16th Cross Road, Khar, Mumbai",
+    "capacity": 15,
+    "pricing": "per_seat",
+    "price_per_hour": 140,
+    "price_per_day": 750,
+    "noise_level": "lively",
+    "wifi_mbps": 100,
+    "amenities": [
+      "lockers",
+      "natural_light",
+      "pantry",
+      "parking",
+      "phone_booth",
+      "power_backup",
+      "printer",
+      "standing_desk",
+      "whiteboard"
+    ],
+    "rating": 3.7,
+    "review_count": 333,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "open_time": "08:00",
+    "close_time": "22:00",
+    "recurring_bookings": [],
+    "description": "Lively, social hot-desk floor for up to 15 people on the 3rd floor in Khar."
+  },
+  {
+    "id": "L011",
+    "name": "Kora Commons BKC",
+    "space_type": "meeting_room",
+    "area": "bkc",
+    "address": "9th floor, 58 Tower Lane, BKC, Mumbai",
+    "capacity": 6,
+    "pricing": "per_room",
+    "price_per_hour": 1750,
+    "price_per_day": 11000,
+    "noise_level": "moderate",
+    "wifi_mbps": 75,
+    "amenities": [
+      "access_24x7",
+      "coffee",
+      "pantry",
+      "power_backup",
+      "tv_screen",
+      "video_conferencing",
+      "whiteboard"
+    ],
+    "rating": 4.6,
+    "review_count": 352,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "00:00",
+    "close_time": "23:59",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          0,
+          1,
+          2
+        ],
+        "start": "14:00",
+        "end": "17:00"
+      },
+      {
+        "weekdays": [
+          1,
+          3,
+          4
+        ],
+        "start": "12:00",
+        "end": "14:00"
+      },
+      {
+        "weekdays": [
+          0
+        ],
+        "start": "10:00",
+        "end": "12:00"
+      }
+    ],
+    "description": "Moderately busy meeting room for up to 6 people on the 9th floor in BKC."
+  },
+  {
+    "id": "L012",
+    "name": "Kiln Studio BKC",
+    "space_type": "meeting_room",
+    "area": "bkc",
+    "address": "2nd floor, 54 G Block Avenue, BKC, Mumbai",
+    "capacity": 12,
+    "pricing": "per_room",
+    "price_per_hour": 3050,
+    "price_per_day": 18700,
+    "noise_level": "moderate",
+    "wifi_mbps": 500,
+    "amenities": [
+      "coffee",
+      "parking",
+      "power_backup",
+      "tv_screen",
+      "video_conferencing"
+    ],
+    "rating": 0.0,
+    "review_count": 0,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "open_time": "08:00",
+    "close_time": "20:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          4
+        ],
+        "start": "14:00",
+        "end": "16:00"
+      },
+      {
+        "weekdays": [
+          2
+        ],
+        "start": "16:00",
+        "end": "18:00"
+      }
+    ],
+    "description": "Moderately busy meeting room for up to 12 people on the 2nd floor in BKC."
+  },
+  {
+    "id": "L013",
+    "name": "Kiln Loft BKC",
+    "space_type": "private_cabin",
+    "area": "bkc",
+    "address": "9th floor, 13 G Block Avenue, BKC, Mumbai",
+    "capacity": 6,
+    "pricing": "per_room",
+    "price_per_hour": 1750,
+    "price_per_day": 11200,
+    "noise_level": "quiet",
+    "wifi_mbps": 150,
+    "amenities": [
+      "coffee",
+      "power_backup",
+      "tv_screen",
+      "wheelchair_accessible"
+    ],
+    "rating": 4.5,
+    "review_count": 7,
+    "instant_book": false,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "open_time": "10:00",
+    "close_time": "22:00",
+    "recurring_bookings": [],
+    "description": "Quiet private cabin for up to 6 people on the 9th floor in BKC."
+  },
+  {
+    "id": "L014",
+    "name": "Basalt Studio BKC",
+    "space_type": "hot_desk",
+    "area": "bkc",
+    "address": "2nd floor, 33 Tower Lane, BKC, Mumbai",
+    "capacity": 40,
+    "pricing": "per_seat",
+    "price_per_hour": 150,
+    "price_per_day": 750,
+    "noise_level": "lively",
+    "wifi_mbps": 50,
+    "amenities": [
+      "access_24x7",
+      "coffee",
+      "lockers",
+      "natural_light",
+      "pantry",
+      "parking",
+      "power_backup",
+      "printer",
+      "standing_desk"
+    ],
+    "rating": 4.5,
+    "review_count": 396,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "00:00",
+    "close_time": "23:59",
+    "recurring_bookings": [],
+    "description": "Lively, social hot-desk floor for up to 40 people on the 2nd floor in BKC."
+  },
+  {
+    "id": "L015",
+    "name": "Quill Loft BKC",
+    "space_type": "meeting_room",
+    "area": "bkc",
+    "address": "9th floor, 65 G Block Avenue, BKC, Mumbai",
+    "capacity": 20,
+    "pricing": "per_room",
+    "price_per_hour": 5850,
+    "price_per_day": 36900,
+    "noise_level": "moderate",
+    "wifi_mbps": 150,
+    "amenities": [
+      "access_24x7",
+      "coffee",
+      "power_backup",
+      "tv_screen",
+      "wheelchair_accessible"
+    ],
+    "rating": 4.2,
+    "review_count": 1,
+    "instant_book": false,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "00:00",
+    "close_time": "23:59",
+    "recurring_bookings": [],
+    "description": "Moderately busy meeting room for up to 20 people on the 9th floor in BKC."
+  },
+  {
+    "id": "L016",
+    "name": "Monsoon Loft Andheri",
+    "space_type": "meeting_room",
+    "area": "andheri",
+    "address": "3rd floor, 65 Marol Gate Road, Andheri, Mumbai",
+    "capacity": 4,
+    "pricing": "per_room",
+    "price_per_hour": 950,
+    "price_per_day": 6400,
+    "noise_level": "quiet",
+    "wifi_mbps": 500,
+    "amenities": [
+      "natural_light",
+      "parking",
+      "projector",
+      "video_conferencing",
+      "whiteboard"
+    ],
+    "rating": 3.6,
+    "review_count": 312,
+    "instant_book": false,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "open_time": "08:00",
+    "close_time": "20:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          2
+        ],
+        "start": "14:00",
+        "end": "17:00"
+      }
+    ],
+    "description": "Quiet meeting room for up to 4 people on the 3rd floor in Andheri."
+  },
+  {
+    "id": "L017",
+    "name": "Arcade Commons Andheri",
+    "space_type": "meeting_room",
+    "area": "andheri",
+    "address": "4th floor, 68 Marol Gate Road, Andheri, Mumbai",
+    "capacity": 8,
+    "pricing": "per_room",
+    "price_per_hour": 1700,
+    "price_per_day": 10600,
+    "noise_level": "moderate",
+    "wifi_mbps": 200,
+    "amenities": [
+      "coffee",
+      "natural_light",
+      "pantry",
+      "phone_booth",
+      "power_backup",
+      "printer",
+      "projector",
+      "video_conferencing",
+      "whiteboard"
+    ],
+    "rating": 4.1,
+    "review_count": 48,
+    "instant_book": false,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "09:00",
+    "close_time": "21:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          2
+        ],
+        "start": "13:00",
+        "end": "16:00"
+      },
+      {
+        "weekdays": [
+          0,
+          1,
+          2
+        ],
+        "start": "10:00",
+        "end": "12:00"
+      }
+    ],
+    "description": "Moderately busy meeting room for up to 8 people on the 4th floor in Andheri."
+  },
+  {
+    "id": "L018",
+    "name": "Monsoon House Andheri",
+    "space_type": "private_cabin",
+    "area": "andheri",
+    "address": "9th floor, 12 Link Plaza Road, Andheri, Mumbai",
+    "capacity": 4,
+    "pricing": "per_room",
+    "price_per_hour": 900,
+    "price_per_day": 6100,
+    "noise_level": "moderate",
+    "wifi_mbps": 300,
+    "amenities": [
+      "natural_light",
+      "power_backup",
+      "printer",
+      "tv_screen",
+      "wheelchair_accessible",
+      "whiteboard"
+    ],
+    "rating": 3.7,
+    "review_count": 296,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "open_time": "08:00",
+    "close_time": "20:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          1,
+          2
+        ],
+        "start": "12:00",
+        "end": "15:00"
+      },
+      {
+        "weekdays": [
+          1
+        ],
+        "start": "13:00",
+        "end": "16:00"
+      }
+    ],
+    "description": "Moderately busy private cabin for up to 4 people on the 9th floor in Andheri."
+  },
+  {
+    "id": "L019",
+    "name": "Teak Commons Andheri",
+    "space_type": "hot_desk",
+    "area": "andheri",
+    "address": "3rd floor, 37 Marol Gate Road, Andheri, Mumbai",
+    "capacity": 30,
+    "pricing": "per_seat",
+    "price_per_hour": 140,
+    "price_per_day": 800,
+    "noise_level": "lively",
+    "wifi_mbps": 75,
+    "amenities": [
+      "access_24x7",
+      "coffee",
+      "natural_light",
+      "pantry",
+      "phone_booth",
+      "power_backup",
+      "printer"
+    ],
+    "rating": 4.0,
+    "review_count": 7,
+    "instant_book": false,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "00:00",
+    "close_time": "23:59",
+    "recurring_bookings": [],
+    "description": "Lively, social hot-desk floor for up to 30 people on the 3rd floor in Andheri."
+  },
+  {
+    "id": "L020",
+    "name": "Coir Collective Andheri",
+    "space_type": "hot_desk",
+    "area": "andheri",
+    "address": "5th floor, 3 Marol Gate Road, Andheri, Mumbai",
+    "capacity": 25,
+    "pricing": "per_seat",
+    "price_per_hour": 150,
+    "price_per_day": 900,
+    "noise_level": "moderate",
+    "wifi_mbps": 300,
+    "amenities": [
+      "access_24x7",
+      "coffee",
+      "lockers",
+      "pantry",
+      "phone_booth",
+      "power_backup"
+    ],
+    "rating": 3.5,
+    "review_count": 80,
+    "instant_book": false,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "00:00",
+    "close_time": "23:59",
+    "recurring_bookings": [],
+    "description": "Moderately busy hot-desk floor for up to 25 people on the 5th floor in Andheri."
+  },
+  {
+    "id": "L021",
+    "name": "Ember Collective Lower Parel",
+    "space_type": "meeting_room",
+    "area": "lower_parel",
+    "address": "4th floor, 79 Mill Compound Road, Lower Parel, Mumbai",
+    "capacity": 6,
+    "pricing": "per_room",
+    "price_per_hour": 1600,
+    "price_per_day": 11800,
+    "noise_level": "moderate",
+    "wifi_mbps": 200,
+    "amenities": [
+      "coffee",
+      "pantry",
+      "phone_booth",
+      "printer",
+      "tv_screen",
+      "whiteboard"
+    ],
+    "rating": 3.8,
+    "review_count": 3,
+    "instant_book": false,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "10:00",
+    "close_time": "22:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          0,
+          3,
+          4
+        ],
+        "start": "11:00",
+        "end": "14:00"
+      },
+      {
+        "weekdays": [
+          1,
+          3,
+          4
+        ],
+        "start": "10:00",
+        "end": "13:00"
+      }
+    ],
+    "description": "Moderately busy meeting room for up to 6 people on the 4th floor in Lower Parel."
+  },
+  {
+    "id": "L022",
+    "name": "Juniper Commons Lower Parel",
+    "space_type": "meeting_room",
+    "area": "lower_parel",
+    "address": "9th floor, 56 Mill Compound Road, Lower Parel, Mumbai",
+    "capacity": 10,
+    "pricing": "per_room",
+    "price_per_hour": 2400,
+    "price_per_day": 16300,
+    "noise_level": "lively",
+    "wifi_mbps": 50,
+    "amenities": [
+      "access_24x7",
+      "coffee",
+      "parking",
+      "power_backup",
+      "projector",
+      "video_conferencing",
+      "wheelchair_accessible",
+      "whiteboard"
+    ],
+    "rating": 4.8,
+    "review_count": 232,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "00:00",
+    "close_time": "23:59",
+    "recurring_bookings": [],
+    "description": "Lively, social meeting room for up to 10 people on the 9th floor in Lower Parel."
+  },
+  {
+    "id": "L023",
+    "name": "Lantern Loft Lower Parel",
+    "space_type": "private_cabin",
+    "area": "lower_parel",
+    "address": "7th floor, 56 Mill Compound Road, Lower Parel, Mumbai",
+    "capacity": 5,
+    "pricing": "per_room",
+    "price_per_hour": 1350,
+    "price_per_day": 8600,
+    "noise_level": "quiet",
+    "wifi_mbps": 150,
+    "amenities": [
+      "access_24x7",
+      "coffee",
+      "parking",
+      "power_backup",
+      "printer",
+      "video_conferencing",
+      "whiteboard"
+    ],
+    "rating": 4.1,
+    "review_count": 263,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "00:00",
+    "close_time": "23:59",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          0
+        ],
+        "start": "13:00",
+        "end": "15:00"
+      }
+    ],
+    "description": "Quiet private cabin for up to 5 people on the 7th floor in Lower Parel."
+  },
+  {
+    "id": "L024",
+    "name": "Coir Loft Lower Parel",
+    "space_type": "hot_desk",
+    "area": "lower_parel",
+    "address": "4th floor, 47 Mill Compound Road, Lower Parel, Mumbai",
+    "capacity": 35,
+    "pricing": "per_seat",
+    "price_per_hour": 150,
+    "price_per_day": 900,
+    "noise_level": "moderate",
+    "wifi_mbps": 300,
+    "amenities": [
+      "access_24x7",
+      "coffee",
+      "lockers",
+      "pantry",
+      "phone_booth",
+      "power_backup",
+      "printer",
+      "standing_desk"
+    ],
+    "rating": 3.7,
+    "review_count": 241,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "00:00",
+    "close_time": "23:59",
+    "recurring_bookings": [],
+    "description": "Moderately busy hot-desk floor for up to 35 people on the 4th floor in Lower Parel."
+  },
+  {
+    "id": "L025",
+    "name": "Ferry Works Powai",
+    "space_type": "meeting_room",
+    "area": "powai",
+    "address": "2nd floor, 27 Lakeside Crescent, Powai, Mumbai",
+    "capacity": 6,
+    "pricing": "per_room",
+    "price_per_hour": 1400,
+    "price_per_day": 10300,
+    "noise_level": "quiet",
+    "wifi_mbps": 150,
+    "amenities": [
+      "pantry",
+      "power_backup",
+      "printer",
+      "projector",
+      "video_conferencing",
+      "wheelchair_accessible"
+    ],
+    "rating": 4.6,
+    "review_count": 335,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "open_time": "08:00",
+    "close_time": "20:00",
+    "recurring_bookings": [],
+    "description": "Quiet meeting room for up to 6 people on the 2nd floor in Powai."
+  },
+  {
+    "id": "L026",
+    "name": "Arcade Works Powai",
+    "space_type": "private_cabin",
+    "area": "powai",
+    "address": "7th floor, 68 Lakeside Crescent, Powai, Mumbai",
+    "capacity": 4,
+    "pricing": "per_room",
+    "price_per_hour": 1050,
+    "price_per_day": 7200,
+    "noise_level": "quiet",
+    "wifi_mbps": 40,
+    "amenities": [
+      "coffee",
+      "lockers",
+      "pantry",
+      "power_backup",
+      "printer",
+      "whiteboard"
+    ],
+    "rating": 4.5,
+    "review_count": 258,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "open_time": "08:00",
+    "close_time": "20:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          3
+        ],
+        "start": "16:00",
+        "end": "19:00"
+      },
+      {
+        "weekdays": [
+          1,
+          2,
+          4
+        ],
+        "start": "11:00",
+        "end": "13:00"
+      },
+      {
+        "weekdays": [
+          2,
+          3
+        ],
+        "start": "11:00",
+        "end": "14:00"
+      }
+    ],
+    "description": "Quiet private cabin for up to 4 people on the 7th floor in Powai."
+  },
+  {
+    "id": "L027",
+    "name": "Juniper Studio Powai",
+    "space_type": "hot_desk",
+    "area": "powai",
+    "address": "9th floor, 71 Lakeside Crescent, Powai, Mumbai",
+    "capacity": 20,
+    "pricing": "per_seat",
+    "price_per_hour": 140,
+    "price_per_day": 800,
+    "noise_level": "moderate",
+    "wifi_mbps": 500,
+    "amenities": [
+      "access_24x7",
+      "coffee",
+      "lockers",
+      "natural_light",
+      "pantry",
+      "parking",
+      "phone_booth",
+      "power_backup",
+      "printer",
+      "standing_desk"
+    ],
+    "rating": 4.1,
+    "review_count": 83,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "00:00",
+    "close_time": "23:59",
+    "recurring_bookings": [],
+    "description": "Moderately busy hot-desk floor for up to 20 people on the 9th floor in Powai."
+  },
+  {
+    "id": "L028",
+    "name": "Verandah House Powai",
+    "space_type": "meeting_room",
+    "area": "powai",
+    "address": "2nd floor, 32 Lakeside Crescent, Powai, Mumbai",
+    "capacity": 16,
+    "pricing": "per_room",
+    "price_per_hour": 3800,
+    "price_per_day": 26600,
+    "noise_level": "quiet",
+    "wifi_mbps": 500,
+    "amenities": [
+      "natural_light",
+      "pantry",
+      "parking",
+      "power_backup",
+      "printer",
+      "projector",
+      "video_conferencing"
+    ],
+    "rating": 4.4,
+    "review_count": 133,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "open_time": "09:00",
+    "close_time": "21:00",
+    "recurring_bookings": [],
+    "description": "Quiet meeting room for up to 16 people on the 2nd floor in Powai."
+  },
+  {
+    "id": "L029",
+    "name": "Sandstone House Fort",
+    "space_type": "meeting_room",
+    "area": "fort",
+    "address": "4th floor, 29 Ledger Street, Fort, Mumbai",
+    "capacity": 4,
+    "pricing": "per_room",
+    "price_per_hour": 1350,
+    "price_per_day": 10000,
+    "noise_level": "quiet",
+    "wifi_mbps": 150,
+    "amenities": [
+      "coffee",
+      "phone_booth",
+      "power_backup",
+      "projector",
+      "tv_screen",
+      "whiteboard"
+    ],
+    "rating": 3.6,
+    "review_count": 126,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "open_time": "09:00",
+    "close_time": "21:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          2
+        ],
+        "start": "10:00",
+        "end": "12:00"
+      },
+      {
+        "weekdays": [
+          4
+        ],
+        "start": "13:00",
+        "end": "16:00"
+      }
+    ],
+    "description": "Quiet meeting room for up to 4 people on the 4th floor in Fort."
+  },
+  {
+    "id": "L030",
+    "name": "Harbour Collective Fort",
+    "space_type": "meeting_room",
+    "area": "fort",
+    "address": "5th floor, 57 Ledger Street, Fort, Mumbai",
+    "capacity": 8,
+    "pricing": "per_room",
+    "price_per_hour": 1850,
+    "price_per_day": 12500,
+    "noise_level": "quiet",
+    "wifi_mbps": 300,
+    "amenities": [
+      "coffee",
+      "natural_light",
+      "printer",
+      "video_conferencing",
+      "whiteboard"
+    ],
+    "rating": 4.7,
+    "review_count": 24,
+    "instant_book": false,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "open_time": "10:00",
+    "close_time": "22:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          0
+        ],
+        "start": "13:00",
+        "end": "16:00"
+      }
+    ],
+    "description": "Quiet meeting room for up to 8 people on the 5th floor in Fort."
+  },
+  {
+    "id": "L031",
+    "name": "Verandah Loft Fort",
+    "space_type": "hot_desk",
+    "area": "fort",
+    "address": "3rd floor, 19 Ledger Street, Fort, Mumbai",
+    "capacity": 18,
+    "pricing": "per_seat",
+    "price_per_hour": 150,
+    "price_per_day": 950,
+    "noise_level": "moderate",
+    "wifi_mbps": 75,
+    "amenities": [
+      "coffee",
+      "lockers",
+      "natural_light",
+      "pantry",
+      "power_backup",
+      "wheelchair_accessible"
+    ],
+    "rating": 3.7,
+    "review_count": 49,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "open_time": "08:00",
+    "close_time": "22:00",
+    "recurring_bookings": [],
+    "description": "Moderately busy hot-desk floor for up to 18 people on the 3rd floor in Fort."
+  },
+  {
+    "id": "L032",
+    "name": "Kora House Malad",
+    "space_type": "meeting_room",
+    "area": "malad",
+    "address": "7th floor, 73 Mindpark Road, Malad, Mumbai",
+    "capacity": 6,
+    "pricing": "per_room",
+    "price_per_hour": 1300,
+    "price_per_day": 7900,
+    "noise_level": "moderate",
+    "wifi_mbps": 150,
+    "amenities": [
+      "natural_light",
+      "video_conferencing",
+      "whiteboard"
+    ],
+    "rating": 4.0,
+    "review_count": 3,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "open_time": "10:00",
+    "close_time": "22:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          0,
+          1,
+          2
+        ],
+        "start": "10:00",
+        "end": "12:00"
+      }
+    ],
+    "description": "Moderately busy meeting room for up to 6 people on the 7th floor in Malad."
+  },
+  {
+    "id": "L033",
+    "name": "Kiln Collective Malad",
+    "space_type": "hot_desk",
+    "area": "malad",
+    "address": "5th floor, 14 Mindpark Road, Malad, Mumbai",
+    "capacity": 30,
+    "pricing": "per_seat",
+    "price_per_hour": 160,
+    "price_per_day": 1000,
+    "noise_level": "lively",
+    "wifi_mbps": 300,
+    "amenities": [
+      "access_24x7",
+      "coffee",
+      "lockers",
+      "pantry",
+      "phone_booth",
+      "power_backup",
+      "printer"
+    ],
+    "rating": 3.6,
+    "review_count": 219,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "00:00",
+    "close_time": "23:59",
+    "recurring_bookings": [],
+    "description": "Lively, social hot-desk floor for up to 30 people on the 5th floor in Malad."
+  },
+  {
+    "id": "L034",
+    "name": "Arcade Studio Malad",
+    "space_type": "private_cabin",
+    "area": "malad",
+    "address": "7th floor, 23 Mindpark Road, Malad, Mumbai",
+    "capacity": 8,
+    "pricing": "per_room",
+    "price_per_hour": 1450,
+    "price_per_day": 9400,
+    "noise_level": "quiet",
+    "wifi_mbps": 150,
+    "amenities": [
+      "coffee",
+      "lockers",
+      "pantry",
+      "parking",
+      "tv_screen",
+      "wheelchair_accessible",
+      "whiteboard"
+    ],
+    "rating": 3.8,
+    "review_count": 71,
+    "instant_book": false,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "open_time": "08:00",
+    "close_time": "20:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          2
+        ],
+        "start": "15:00",
+        "end": "17:00"
+      }
+    ],
+    "description": "Quiet private cabin for up to 8 people on the 7th floor in Malad."
+  },
+  {
+    "id": "L035",
+    "name": "Anchor Works Goregaon",
+    "space_type": "meeting_room",
+    "area": "goregaon",
+    "address": "5th floor, 25 Studio Colony Road, Goregaon, Mumbai",
+    "capacity": 10,
+    "pricing": "per_room",
+    "price_per_hour": 1750,
+    "price_per_day": 12100,
+    "noise_level": "moderate",
+    "wifi_mbps": 100,
+    "amenities": [
+      "coffee",
+      "natural_light",
+      "parking",
+      "power_backup",
+      "projector",
+      "whiteboard"
+    ],
+    "rating": 3.7,
+    "review_count": 150,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "08:00",
+    "close_time": "20:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          3,
+          4
+        ],
+        "start": "14:00",
+        "end": "16:00"
+      },
+      {
+        "weekdays": [
+          2,
+          3
+        ],
+        "start": "15:00",
+        "end": "18:00"
+      },
+      {
+        "weekdays": [
+          0,
+          2
+        ],
+        "start": "14:00",
+        "end": "16:00"
+      }
+    ],
+    "description": "Moderately busy meeting room for up to 10 people on the 5th floor in Goregaon."
+  },
+  {
+    "id": "L036",
+    "name": "Ferry Loft Goregaon",
+    "space_type": "hot_desk",
+    "area": "goregaon",
+    "address": "2nd floor, 9 Studio Colony Road, Goregaon, Mumbai",
+    "capacity": 25,
+    "pricing": "per_seat",
+    "price_per_hour": 160,
+    "price_per_day": 1000,
+    "noise_level": "quiet",
+    "wifi_mbps": 150,
+    "amenities": [
+      "access_24x7",
+      "coffee",
+      "natural_light",
+      "pantry",
+      "parking",
+      "power_backup"
+    ],
+    "rating": 4.2,
+    "review_count": 82,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "00:00",
+    "close_time": "23:59",
+    "recurring_bookings": [],
+    "description": "Quiet hot-desk floor for up to 25 people on the 2nd floor in Goregaon."
+  },
+  {
+    "id": "L037",
+    "name": "Salt Loft Vashi",
+    "space_type": "meeting_room",
+    "area": "vashi",
+    "address": "7th floor, 54 Sector 30 Palm Road, Vashi, Mumbai",
+    "capacity": 8,
+    "pricing": "per_room",
+    "price_per_hour": 1150,
+    "price_per_day": 7500,
+    "noise_level": "quiet",
+    "wifi_mbps": 300,
+    "amenities": [
+      "coffee",
+      "natural_light",
+      "printer",
+      "projector",
+      "wheelchair_accessible",
+      "whiteboard"
+    ],
+    "rating": 4.6,
+    "review_count": 220,
+    "instant_book": false,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "open_time": "10:00",
+    "close_time": "22:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          0,
+          3,
+          4
+        ],
+        "start": "14:00",
+        "end": "17:00"
+      },
+      {
+        "weekdays": [
+          0
+        ],
+        "start": "11:00",
+        "end": "13:00"
+      }
+    ],
+    "description": "Quiet meeting room for up to 8 people on the 7th floor in Vashi."
+  },
+  {
+    "id": "L038",
+    "name": "Loom Collective Vashi",
+    "space_type": "hot_desk",
+    "area": "vashi",
+    "address": "5th floor, 13 Sector 30 Palm Road, Vashi, Mumbai",
+    "capacity": 20,
+    "pricing": "per_seat",
+    "price_per_hour": 100,
+    "price_per_day": 550,
+    "noise_level": "quiet",
+    "wifi_mbps": 75,
+    "amenities": [
+      "coffee",
+      "pantry",
+      "power_backup",
+      "printer",
+      "standing_desk",
+      "whiteboard"
+    ],
+    "rating": 4.5,
+    "review_count": 8,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "open_time": "08:00",
+    "close_time": "22:00",
+    "recurring_bookings": [],
+    "description": "Quiet hot-desk floor for up to 20 people on the 5th floor in Vashi."
+  },
+  {
+    "id": "L039",
+    "name": "Harbour House Vashi",
+    "space_type": "private_cabin",
+    "area": "vashi",
+    "address": "7th floor, 24 Sector 30 Palm Road, Vashi, Mumbai",
+    "capacity": 4,
+    "pricing": "per_room",
+    "price_per_hour": 750,
+    "price_per_day": 4800,
+    "noise_level": "quiet",
+    "wifi_mbps": 150,
+    "amenities": [
+      "access_24x7",
+      "coffee",
+      "lockers",
+      "natural_light",
+      "power_backup",
+      "tv_screen",
+      "video_conferencing",
+      "whiteboard"
+    ],
+    "rating": 4.8,
+    "review_count": 343,
+    "instant_book": false,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "open_time": "00:00",
+    "close_time": "23:59",
+    "recurring_bookings": [],
+    "description": "Quiet private cabin for up to 4 people on the 7th floor in Vashi."
+  },
+  {
+    "id": "L040",
+    "name": "Tide Works Vashi",
+    "space_type": "meeting_room",
+    "area": "vashi",
+    "address": "2nd floor, 20 Sector 30 Palm Road, Vashi, Mumbai",
+    "capacity": 30,
+    "pricing": "per_room",
+    "price_per_hour": 4150,
+    "price_per_day": 26400,
+    "noise_level": "moderate",
+    "wifi_mbps": 200,
+    "amenities": [
+      "coffee",
+      "natural_light",
+      "pantry",
+      "power_backup",
+      "tv_screen"
+    ],
+    "rating": 4.8,
+    "review_count": 238,
+    "instant_book": true,
+    "open_days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "open_time": "09:00",
+    "close_time": "21:00",
+    "recurring_bookings": [
+      {
+        "weekdays": [
+          0,
+          1,
+          4
+        ],
+        "start": "14:00",
+        "end": "16:00"
+      },
+      {
+        "weekdays": [
+          4
+        ],
+        "start": "10:00",
+        "end": "12:00"
+      },
+      {
+        "weekdays": [
+          0
+        ],
+        "start": "11:00",
+        "end": "14:00"
+      }
+    ],
+    "description": "Moderately busy meeting room for up to 30 people on the 2nd floor in Vashi."
+  }
+]

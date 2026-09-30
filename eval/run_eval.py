@@ -1,0 +1,192 @@
+"""Evaluation runner.
+
+Runs every query in eval/queries.json through the real SearchService and checks
+machine-verifiable expectations (parsed fields, outcome status, that exact results
+honour every hard constraint, and that results are grounded in the dataset).
+
+Usage:
+    python -m eval.run_eval --parser rules          # offline, no API key needed
+    python -m eval.run_eval --parser llm            # needs LLM_API_KEY / GROQ_API_KEY
+Writes eval/results_<parser>.md and eval/results_<parser>.json.
+"""
+
+from __future__ import annotations
+
+import argparse
+import asyncio
+import json
+import statistics
+import time
+from pathlib import Path
+
+from app.config import Settings, get_settings
+from app.core.models import SearchRequest, SearchResponse
+from app.data.repository import load_listings
+from app.services.explainer import FactSheet, check_grounding
+from app.services.llm_client import LLMClient
+from app.services.search import SearchService
+
+HERE = Path(__file__).parent
+REFERENCE_TIME = "2026-10-05T10:00:00+05:30"  # Monday 10:00 IST, fixed for reproducibility
+MARK = {"exact": "", "alternative": "~", "suggestion": "*"}
+
+
+def check(case: dict, r: SearchResponse, data: dict) -> tuple[list[str], int, int, list[str]]:
+    """Return (failures, parse_fields_ok, parse_fields_total, parse_misses)."""
+    e = case["expect"]
+    fails: list[str] = []
+    misses: list[str] = []
+    ok_fields = total_fields = 0
+
+    if r.status not in e["status"]:
+        fails.append(f"status {r.status}, expected {'/'.join(e['status'])}")
+
+    # ---- parsing ------------------------------------------------------------
+    from app.services.normalize import resolve_location  # local import keeps module import light
+    areas, *_ = resolve_location(r.parsed.location_text)
+    if "areas" in e:
+        total_fields += 1
+        if sorted(areas) == sorted(e["areas"]):
+            ok_fields += 1
+        else:
+            misses.append(f"areas={areas}")
+    if "areas_include" in e:
+        total_fields += 1
+        if set(e["areas_include"]) <= set(areas):
+            ok_fields += 1
+        else:
+            misses.append(f"areas={areas}")
+    for k, v in e.get("parse", {}).items():
+        total_fields += 1
+        got = getattr(r.parsed, k)
+        if isinstance(v, list):
+            same = sorted(got) == sorted(v)
+        elif isinstance(v, (int, float)) and got is not None and not isinstance(v, bool):
+            same = abs(float(got) - float(v)) < 1e-6
+        else:
+            same = got == v
+        if same:
+            ok_fields += 1
+        else:
+            misses.append(f"{k}={got!r}")
+    if misses:
+        fails.append("parse: " + ", ".join(misses))
+
+    # ---- outcome ------------------------------------------------------------
+    exact = [it for it in r.results if it.match == "exact"]
+    rc = e.get("results")
+    if rc:
+        for it in exact:
+            l = it.listing
+            if "area_in" in rc and l.area not in rc["area_in"]:
+                fails.append(f"{l.id} outside requested area")
+            if "min_capacity" in rc and l.capacity < rc["min_capacity"]:
+                fails.append(f"{l.id} too small")
+            if "space_type" in rc and l.space_type != rc["space_type"]:
+                fails.append(f"{l.id} wrong space type")
+            if "max_cost" in rc and (it.cost_in_budget_unit is None or it.cost_in_budget_unit > rc["max_cost"] + 1e-6):
+                fails.append(f"{l.id} over budget")
+            for a in rc.get("has_amenities", []):
+                if a not in l.amenities:
+                    fails.append(f"{l.id} lacks {a}")
+    if "top_id" in e and r.status == "ok" and (not exact or exact[0].listing.id != e["top_id"]):
+        fails.append(f"top result {exact[0].listing.id if exact else None}, expected {e['top_id']}")
+    if "exact_count" in e and r.total_exact_matches != e["exact_count"]:
+        fails.append(f"{r.total_exact_matches} exact matches, expected {e['exact_count']}")
+    if e.get("results_empty") and r.results:
+        fails.append("returned results, expected none")
+    if e.get("question") and not r.clarifying_question:
+        fails.append("no clarifying question")
+    if e.get("only_suggestions") and any(it.match != "suggestion" for it in r.results):
+        fails.append("ranked results for a vague query")
+    if "message_contains" in e and e["message_contains"].lower() not in (r.message or "").lower():
+        fails.append(f"message lacks '{e['message_contains']}'")
+    if "alternatives_mention" in e and not all(e["alternatives_mention"] in " ".join(it.violations) for it in r.results):
+        fails.append("alternatives don't state the location trade-off")
+    for u in e.get("unsupported_contains", []):
+        if not any(u in x for x in r.parsed.unsupported_requests):
+            fails.append(f"'{u}' not flagged as unsupported")
+
+    # ---- grounding (checked for every query) ---------------------------------
+    for it in r.results:
+        if data.get(it.listing.id) != it.listing:
+            fails.append(f"GROUNDING: {it.listing.id} differs from dataset")
+        if it.explanation_source == "llm":
+            reason = check_grounding(it.explanation, FactSheet(it.listing.id, it.listing.name, it.why, it.tradeoffs))
+            if reason:
+                fails.append(f"GROUNDING: {it.listing.id} explanation {reason}")
+    return fails, ok_fields, total_fields, misses
+
+
+async def main(parser: str) -> None:
+    settings: Settings = get_settings()
+    if parser == "llm" and not settings.llm_enabled:
+        raise SystemExit("Set LLM_API_KEY (or GROQ_API_KEY) to run the LLM evaluation.")
+    svc = SearchService(settings, load_listings(), LLMClient(settings))
+    data = {l.id: l for l in load_listings()}
+    cases = json.loads((HERE / "queries.json").read_text(encoding="utf-8"))
+
+    rows, raw = [], []
+    ok_fields = total_fields = 0
+    latencies, fallbacks, llm_tokens = [], 0, 0
+    for case in cases:
+        t = time.perf_counter()
+        r = await svc.search(SearchRequest(query=case["query"], reference_time=REFERENCE_TIME, parser=parser))
+        latencies.append((time.perf_counter() - t) * 1000)
+        fails, okf, totf, _ = check(case, r, data)
+        ok_fields += okf
+        total_fields += totf
+        fallbacks += "fallback" in r.trace.get("parser", "")
+        llm_tokens += sum((c.get("prompt_tokens") or 0) + (c.get("completion_tokens") or 0) for c in r.trace.get("llm_calls", []))
+        top = ", ".join(f"{it.listing.id}{MARK[it.match]}" for it in r.results[:3]) or "—"
+        rows.append((case, r, fails, okf, totf, top))
+        raw.append({"id": case["id"], "query": case["query"], "status": r.status, "parser": r.trace.get("parser"),
+                    "parsed": r.parsed.model_dump(), "results": [it.listing.id for it in r.results], "failures": fails,
+                    "message": r.message, "question": r.clarifying_question})
+
+    passed = sum(1 for _, _, f, *_ in rows if not f)
+    by_cat: dict[str, list[int]] = {}
+    for case, _, f, *_ in rows:
+        by_cat.setdefault(case["category"], [0, 0])
+        by_cat[case["category"]][1] += 1
+        by_cat[case["category"]][0] += not f
+    grounding_fail = sum(1 for _, _, f, *_ in rows if any("GROUNDING" in x for x in f))
+
+    lines = [
+        f"# Evaluation results: `{parser}` parser",
+        "",
+        f"Reference time: {REFERENCE_TIME} (Monday). Model: {settings.llm_model if parser != 'rules' else 'n/a (rule-based)'}. "
+        f"Generated by `python -m eval.run_eval --parser {parser}`.",
+        "",
+        "## Summary",
+        "",
+        "| Metric | Value |",
+        "|---|---|",
+        f"| Queries passing all checks | {passed}/{len(rows)} |",
+        *[f"| {cat} queries passing | {p}/{n} |" for cat, (p, n) in by_cat.items()],
+        f"| Parsed fields correct | {ok_fields}/{total_fields} ({100 * ok_fields / max(total_fields, 1):.0f}%) |",
+        f"| Grounding violations (result not in dataset, or LLM text with unsupported facts) | {grounding_fail} |",
+        f"| LLM parser fallbacks to rules | {fallbacks} |",
+        f"| Latency per query, median / max (ms) | {statistics.median(latencies):.0f} / {max(latencies):.0f} |",
+        *([f"| Total LLM tokens (all queries) | {llm_tokens} |"] if parser != "rules" else []),
+        "",
+        "## Per-query results",
+        "",
+        "`~` = alternative (misses at least one hard constraint), `*` = untailored suggestion shown with a clarifying question. Parsed = expected fields extracted correctly.",
+        "",
+        "| ID | Type | Query | Status | Parsed | Top results | Pass | What failed |",
+        "|---|---|---|---|---|---|---|---|",
+    ]
+    for case, r, fails, okf, totf, top in rows:
+        q = case["query"].replace("|", "\\|")
+        lines.append(f"| {case['id']} | {case['category']} | {q} | {r.status} | {okf}/{totf} | {top} | {'✅' if not fails else '❌'} | {'; '.join(fails) or ''} |")
+    (HERE / f"results_{parser}.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (HERE / f"results_{parser}.json").write_text(json.dumps(raw, indent=2, ensure_ascii=False, default=str), encoding="utf-8")
+    print("\n".join(lines[:16]))
+    print(f"\nwrote eval/results_{parser}.md")
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--parser", choices=["rules", "llm", "auto"], default="auto")
+    asyncio.run(main(ap.parse_args().parser))

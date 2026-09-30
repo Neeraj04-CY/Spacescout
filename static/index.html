@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SpaceScout · Coworking search</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">SpaceScout</span>
+        <span class="tag">Prototype · synthetic listings</span>
+      </div>
+      <nav class="topnav">
+        <span id="llm-status" class="pill pill-muted" title="Which parser is active">Checking…</span>
+        <a href="/docs" target="_blank" rel="noopener">API docs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="search" aria-label="Search">
+      <h1>Describe the space you need</h1>
+      <p class="lede">Area, group size, budget, time, and anything you'd like. Results come only from our listings; nothing is invented.</p>
+      <form id="search-form" class="search-box" autocomplete="off">
+        <label for="q" class="sr-only">Your request</label>
+        <textarea id="q" name="q" rows="2" maxlength="500" required
+          placeholder="e.g. Quiet place for 4 people in Bandra tomorrow afternoon, fast wifi, under ₹600 per person per hour, ideally with a whiteboard"></textarea>
+        <div class="search-actions">
+          <span id="char-count" class="muted small">0 / 500</span>
+          <button id="submit" type="submit" class="btn-primary">Search</button>
+        </div>
+      </form>
+      <div class="examples" aria-label="Example searches">
+        <span class="muted small">Try:</span>
+        <div id="examples" class="chip-row"></div>
+      </div>
+    </section>
+
+    <section id="status" aria-live="polite"></section>
+    <section id="results" aria-label="Results"></section>
+
+    <details class="dataset" id="dataset">
+      <summary>Browse all listings <span class="muted small">(the only data the search can recommend from)</span></summary>
+      <div id="dataset-body" class="dataset-body"><p class="muted small">Loading…</p></div>
+    </details>
+  </main>
+
+  <footer class="wrap footer muted small">
+    All listings, names and addresses are fictional. Availability is a weekly pattern, not a live booking system.
+  </footer>
+
+  <template id="skeleton">
+    <div class="card skeleton"><div class="sk sk-title"></div><div class="sk sk-line"></div><div class="sk sk-line short"></div></div>
+  </template>
+  <script src="/static/app.js"></script>
+</body>
+</html>
