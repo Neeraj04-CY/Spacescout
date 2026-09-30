@@ -85,6 +85,8 @@ def check_grounding(text: str, facts: FactSheet) -> str | None:
     for w in _NOISE_CLAIMS:
         if re.search(rf"\b{w}\b", tl) and not re.search(rf"\b{w}\b", ft):
             return f"noise claim '{w}' not in the facts"
+    if len(text) < 45:
+        return "too short to explain the fit"
     return None
 
 
@@ -105,11 +107,16 @@ EXPLAIN_SCHEMA: dict[str, Any] = {
     "required": ["items"],
 }
 
-EXPLAIN_PROMPT = """You write short explanations for coworking search results, shown under each result card.
-For each item write one or two sentences, at most 35 words in total:
-first the strongest reason it fits, then only the single most important trade-off (skip it if there are none).
-Use ONLY the facts given for that item. Do not add amenities, prices, numbers, ratings, distances or adjectives
-that are not in its facts. Keep numbers exactly as written. Do not start with "It" and do not mention other items.
+EXPLAIN_PROMPT = """You write the explanation shown under each coworking search result.
+For each item: one natural sentence (15-30 words) combining the two or three strongest reasons it fits, then,
+only if it has trade-offs, a short second sentence naming the single most important one.
+Use ONLY that item's facts. Do not add amenities, prices, numbers, ratings, distances or adjectives that are not
+in its facts, and keep numbers exactly as written. Do not start with "It", and do not mention other items.
+
+Example facts: fits ["Quiet space", "Has whiteboard", "₹375/person/hr, within your ₹600/person/hr"],
+tradeoffs ["Wi-Fi is only 50 Mbps"]
+Example text: "A quiet room with a whiteboard at ₹375/person/hr, comfortably within your ₹600 budget. The catch: Wi-Fi is only 50 Mbps."
+
 Plain text, no markdown. Return JSON: {"items": [{"id": "...", "text": "..."}]}."""
 
 

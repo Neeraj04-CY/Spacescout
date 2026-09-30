@@ -66,6 +66,7 @@ def test_grounding_rejects_invented_amenity_number_and_noise():
     assert "number" in check_grounding("Quiet room at ₹399 per person.", SHEET)
     sheet2 = FactSheet("X", "Y", ["Has whiteboard"], [])
     assert "noise" in check_grounding("A peaceful room with a whiteboard.", sheet2)
+    assert "too short" in check_grounding("Has whiteboard.", sheet2)
 
 
 def test_parsed_query_rejects_bad_values():

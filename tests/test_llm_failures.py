@@ -99,14 +99,14 @@ def test_llm_explanation_with_invented_fact_is_rejected():
     def explain_resp(body):
         items = json.loads(body["messages"][1]["content"])
         out = [{"id": it["id"], "text": "Great room with a rooftop pool and a projector."} for it in items]
-        out[1]["text"] = "Quiet space."  # faithful for the second result (L002 is quiet)
+        out[1]["text"] = "A quiet space with fast Wi-Fi (200 Mbps). The catch: no whiteboard."  # faithful for L002
         return chat_response({"items": out})
 
     handler, _ = _router([chat_response(GOOD)], explain_response=explain_resp)
     r = run_search(mock_service(handler), EXAMPLE)
     srcs = [it.explanation_source for it in r.results]
     assert srcs[0].startswith("template (LLM text rejected")
-    assert srcs[1] == "llm" and r.results[1].explanation == "Quiet space."
+    assert srcs[1] == "llm" and r.results[1].explanation.startswith("A quiet space")
 
 
 def test_explain_failure_keeps_template():
