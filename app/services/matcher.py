@@ -128,7 +128,7 @@ def evaluate(listing: Listing, q: ResolvedQuery, skip: set[str] | None = None) -
                     msg = f"{inr(c)}{unit}: {inr(over)} over your {inr(q.budget_amount)}{unit}"
                     cost = min(3.0, 2.5 * over / q.budget_amount)
                 else:
-                    msg, cost = f"Not free: costs {inr(c)}{unit}", 3.0
+                    msg, cost = f"Costs {inr(c)}{unit}, not free", 3.0
                 ev.violations.append(Violation("budget", cost, msg))
 
     # Availability
