@@ -121,3 +121,13 @@ def test_results_are_verbatim_dataset_records():
     data = {l.id: l for l in load_listings()}
     for it in r.results:
         assert it.listing == data[it.listing.id]
+
+
+def test_rate_limit_opens_breaker_and_skips_the_provider():
+    handler, calls = _router([httpx.Response(429, headers={"retry-after": "30"})] * 5)
+    svc = mock_service(handler, explain_with_llm=False)
+    r1 = run_search(svc, EXAMPLE)
+    r2 = run_search(svc, "Meeting room for 6 in BKC tomorrow morning")
+    assert r1.trace["parser"] == "rules (fallback)" and r2.trace["parser"] == "rules (fallback)"
+    assert calls["parse"] == 1  # the second search never called the provider
+    assert "cooling down" in r2.trace["fallback_reason"]

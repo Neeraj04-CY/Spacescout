@@ -56,6 +56,10 @@ class LLMClient:
     def __init__(self, settings: Settings, transport: httpx.AsyncBaseTransport | None = None):
         self.s = settings
         self._transport = transport  # injectable for tests
+        # Circuit breaker: after the provider rate-limits us, skip LLM calls until this
+        # monotonic time, so users get the rule-based fallback instantly instead of
+        # waiting on retries that will also be refused.
+        self._cooldown_until = 0.0
 
     @property
     def enabled(self) -> bool:
@@ -76,6 +80,11 @@ class LLMClient:
         if not self.enabled:
             meta.outcome = "skipped: no API key"
             raise LLMUnavailable("LLM_API_KEY not set")
+
+        remaining = self._cooldown_until - time.monotonic()
+        if remaining > 0:
+            meta.outcome = f"skipped: provider rate limit, cooling down {remaining:.0f}s"
+            raise LLMUnavailable(f"rate-limited, cooling down {remaining:.0f}s")
 
         strict = self.s.llm_strict_schema
         started = time.perf_counter()
@@ -126,9 +135,13 @@ class LLMClient:
                 if resp.status_code in RETRYABLE_STATUS:
                     meta.errors.append(f"http {resp.status_code}")
                     last_err = LLMUnavailable(f"http {resp.status_code}")
-                    retry_after = resp.headers.get("retry-after")
-                    wait = min(float(retry_after), 2.0) if retry_after and retry_after.replace(".", "").isdigit() else 0.6
-                    await asyncio.sleep(wait)
+                    ra = resp.headers.get("retry-after", "")
+                    retry_after = float(ra) if ra.replace(".", "", 1).isdigit() else None
+                    if resp.status_code == 429 and retry_after is not None and retry_after > 2.0:
+                        # Waiting would stall the user: open the breaker and fall back now.
+                        self._cooldown_until = time.monotonic() + retry_after
+                        break
+                    await asyncio.sleep(min(retry_after, 2.0) if retry_after is not None else 0.6)
                     continue
                 if resp.status_code >= 400:
                     meta.errors.append(f"http {resp.status_code}: {resp.text[:160]}")
@@ -153,6 +166,8 @@ class LLMClient:
                 log.info("llm_call", extra={"llm": meta.as_dict()})
                 return parsed, meta
 
+        if isinstance(last_err, LLMUnavailable) and "429" in str(last_err) and self._cooldown_until < time.monotonic():
+            self._cooldown_until = time.monotonic() + 10.0
         meta.latency_ms = round((time.perf_counter() - started) * 1000, 1)
         meta.outcome = f"failed: {last_err}"
         log.warning("llm_call_failed", extra={"llm": meta.as_dict()})

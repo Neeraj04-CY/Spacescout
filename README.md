@@ -43,6 +43,19 @@ python scripts/generate_listings.py       # regenerate the dataset (deterministi
 
 The **Listings** tab shows the full dataset, the only data search can recommend from. Screenshots were taken with the rule-based parser. The UI uses the Geist typeface, self-hosted under the SIL Open Font License (`static/fonts/OFL.txt`), so it works offline.
 
+## Deploy
+
+The repo includes a Render Blueprint (`render.yaml`), a `Dockerfile` and a `Procfile`.
+
+1. On Render, choose **New > Blueprint** and select this repository.
+2. When prompted, set `GROQ_API_KEY`. It's optional: without it the app runs on the rule-based parser.
+3. Health check: `/api/health`, which also reports the deployed commit.
+
+A public deployment adds two protections for the LLM quota:
+
+- **Per-IP rate limit:** 20 searches a minute (`RATE_LIMIT_PER_MINUTE`).
+- **Circuit breaker:** when the provider rate-limits the app, later searches go straight to the rule-based parser until the cool-down ends. Users get an instant answer instead of waiting on retries.
+
 ## How it works
 
 ```mermaid
@@ -167,7 +180,12 @@ scripts/generate_listings.py
 
 ## The data
 
-`app/data/listings.json` holds 40 fictional listings across 10 Mumbai areas: hot desks, meeting rooms and private cabins. Each has price, capacity, amenities, noise level, Wi-Fi speed, rating, review count, instant-book, opening hours and recurring bookings. It is generated deterministically by `scripts/generate_listings.py`. Four listings are hand-tuned (`OVERRIDES` in the script) so the assignment's example query has meaningful trade-offs. Two more cover the few-reviews and no-reviews cases.
+`app/data/listings.json` holds a sample inventory of 40 listings across 10 Mumbai areas: hot desks, meeting rooms and private cabins. Each has price, capacity, amenities, noise level, Wi-Fi speed, rating, review count, instant-book, opening hours and recurring bookings. It is generated deterministically by `scripts/generate_listings.py`.
+
+- **What's real:** streets and PIN codes are real Mumbai locations, and area distances use real coordinates.
+- **What's invented:** operator names, prices, ratings and availability. The assignment asks for synthetic listings. Attaching invented prices and ratings to real coworking brands would publish false claims about real businesses, which is the exact failure this system is built to prevent.
+
+Four listings are hand-tuned (`OVERRIDES` in the script) so the assignment's example query has meaningful trade-offs. Two more cover the few-reviews and no-reviews cases. Swapping in a real inventory means replacing this one JSON file, or the repository module, with a feed from the booking system; nothing else changes.
 
 Availability is a weekly pattern (opening days and hours, minus recurring bookings), so the prototype works on any date. A real system would query live bookings; see `REFLECTION.md`.
 

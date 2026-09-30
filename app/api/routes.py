@@ -20,6 +20,7 @@ async def health() -> dict:
         "llm_configured": s.llm_enabled,
         "llm_model": s.llm_model if s.llm_enabled else None,
         "explain_with_llm": s.explain_with_llm and s.llm_enabled,
+        "version": (s.app_version or "dev")[:12],
     }
 
 

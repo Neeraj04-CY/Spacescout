@@ -133,7 +133,7 @@ async function run(query) {
       body: JSON.stringify({ query }), signal: inflight.signal,
     });
     const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(data.details ? data.details.map((d) => d.message.replace(/^Value error, /, "")).join("; ") : `The server returned ${res.status}.`);
+    if (!res.ok) throw new Error(data.details ? data.details.map((d) => d.message.replace(/^Value error, /, "")).join("; ") : (data.message || `The server returned ${res.status}.`));
     render(data);
   } catch (err) {
     if (err.name === "AbortError") return;

@@ -9,6 +9,7 @@ import json
 import logging
 import time
 import uuid
+from collections import defaultdict, deque
 from pathlib import Path
 
 from fastapi import FastAPI, Request
@@ -56,17 +57,38 @@ def create_app() -> FastAPI:
     app.state.search_service = SearchService(settings, load_listings(), LLMClient(settings))
     log = logging.getLogger("spacescout.http")
 
+    hits: dict[str, deque] = defaultdict(deque)
+
+    def client_ip(request: Request) -> str:
+        fwd = request.headers.get("x-forwarded-for")
+        return fwd.split(",")[0].strip() if fwd else (request.client.host if request.client else "unknown")
+
     @app.middleware("http")
     async def request_context(request: Request, call_next):
         rid = request.headers.get("x-request-id") or uuid.uuid4().hex[:12]
         request.state.request_id = rid
         start = time.perf_counter()
+        if request.method == "POST" and request.url.path == "/api/search" and settings.rate_limit_per_minute > 0:
+            # Simple sliding-window limit per client IP (in-memory: per process, resets on restart).
+            q, now = hits[client_ip(request)], time.monotonic()
+            while q and now - q[0] > 60:
+                q.popleft()
+            if len(q) >= settings.rate_limit_per_minute:
+                retry = int(60 - (now - q[0])) + 1
+                log.info("rate_limited", extra={"request_id": rid})
+                return JSONResponse(
+                    {"error": "rate_limited", "message": f"Too many searches. Try again in {retry} seconds.", "request_id": rid},
+                    status_code=429, headers={"retry-after": str(retry), "x-request-id": rid},
+                )
+            q.append(now)
         try:
             response = await call_next(request)
         except Exception:
             log.exception("unhandled_error", extra={"request_id": rid, "path": request.url.path})
             response = JSONResponse({"error": "internal_error", "request_id": rid}, status_code=500)
         response.headers["x-request-id"] = rid
+        response.headers["x-content-type-options"] = "nosniff"
+        response.headers["referrer-policy"] = "same-origin"
         if request.url.path.startswith("/api"):
             log.info("http", extra={"request_id": rid, "method": request.method, "path": request.url.path,
                                      "status": response.status_code, "ms": round((time.perf_counter() - start) * 1000, 1)})

@@ -23,6 +23,8 @@ class Settings(BaseSettings):
     app_timezone: str = "Asia/Kolkata"
     log_level: str = "INFO"
     max_results: int = 10
+    rate_limit_per_minute: int = 20  # searches per client IP; protects the LLM quota on a public deployment
+    app_version: str | None = Field(default=None, validation_alias=AliasChoices("APP_VERSION", "RENDER_GIT_COMMIT", "RAILWAY_GIT_COMMIT_SHA"))
 
     @property
     def llm_enabled(self) -> bool:

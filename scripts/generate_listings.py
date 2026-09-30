@@ -1,7 +1,7 @@
 """Generate the synthetic listing dataset (app/data/listings.json).
 
 Deterministic (fixed seed) so the dataset, tests and evaluation are reproducible.
-All names and addresses are fictional.
+Operator names are invented; streets and PIN codes are real Mumbai locations.
 
 Run:  python scripts/generate_listings.py
 """
@@ -46,10 +46,20 @@ AREA_NAMES = {
     "bandra": "Bandra", "khar": "Khar", "bkc": "BKC", "andheri": "Andheri", "lower_parel": "Lower Parel",
     "powai": "Powai", "fort": "Fort", "malad": "Malad", "goregaon": "Goregaon", "vashi": "Vashi",
 }
+# Real Mumbai streets and PIN codes, so addresses read like real ones. List lengths
+# matter: they must stay the same to keep the seeded random sequence (and every
+# other attribute) unchanged.
 STREETS = {
-    "bandra": ["Waterfield Lane", "Chapel Row"], "khar": ["16th Cross Road"], "bkc": ["G Block Avenue", "Tower Lane"],
-    "andheri": ["Link Plaza Road", "Marol Gate Road"], "lower_parel": ["Mill Compound Road"], "powai": ["Lakeside Crescent"],
-    "fort": ["Ledger Street"], "malad": ["Mindpark Road"], "goregaon": ["Studio Colony Road"], "vashi": ["Sector 30 Palm Road"],
+    "bandra": ["Hill Road", "Linking Road"], "khar": ["Khar Danda Road"],
+    "bkc": ["G Block", "E Block"], "andheri": ["Marol Maroshi Road", "Andheri-Kurla Road"],
+    "lower_parel": ["Senapati Bapat Marg"], "powai": ["Central Avenue, Hiranandani Gardens"],
+    "fort": ["Dr D N Road"], "malad": ["New Link Road"], "goregaon": ["Aarey Road"], "vashi": ["Palm Beach Road"],
+}
+LOCALITY = {
+    "bandra": "Bandra West, Mumbai 400050", "khar": "Khar West, Mumbai 400052", "bkc": "Bandra Kurla Complex, Mumbai 400051",
+    "andheri": "Andheri East, Mumbai 400059", "lower_parel": "Lower Parel, Mumbai 400013", "powai": "Powai, Mumbai 400076",
+    "fort": "Fort, Mumbai 400001", "malad": "Malad West, Mumbai 400064", "goregaon": "Goregaon East, Mumbai 400063",
+    "vashi": "Vashi, Navi Mumbai 400703",
 }
 
 PREFIXES = ["Kora", "Salt", "Monsoon", "Lantern", "Teak", "Harbour", "Quill", "Arcade", "Ferry", "Kiln",
@@ -147,7 +157,7 @@ def main() -> None:
             "name": f"{names[i - 1]} {AREA_NAMES[area]}",
             "space_type": stype,
             "area": area,
-            "address": f"{floor} floor, {rng.randint(3, 88)} {street}, {AREA_NAMES[area]}, Mumbai",
+            "address": f"{floor} floor, {rng.randint(3, 88)} {street}, {LOCALITY[area]}",
             "capacity": cap,
             "pricing": pricing,
             "price_per_hour": int(pph),

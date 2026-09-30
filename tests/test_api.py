@@ -39,3 +39,18 @@ def test_listing_lookup():
 def test_ui_is_served():
     r = client.get("/")
     assert r.status_code == 200 and "SpaceScout" in r.text
+
+
+def test_search_rate_limit_returns_429(monkeypatch):
+    from app.config import get_settings
+
+    monkeypatch.setenv("RATE_LIMIT_PER_MINUTE", "2")
+    get_settings.cache_clear()
+    try:
+        c = TestClient(create_app())
+        body = {"query": "desk in Khar", "parser": "rules"}
+        codes = [c.post("/api/search", json=body).status_code for _ in range(3)]
+        assert codes == [200, 200, 429]
+    finally:
+        monkeypatch.delenv("RATE_LIMIT_PER_MINUTE")
+        get_settings.cache_clear()
