@@ -2,13 +2,15 @@
 
 Type what you need, for example *"Quiet place for 4 people in Bandra tomorrow afternoon, fast wifi, under ₹600 per person per hour, ideally with a whiteboard"*, and get ranked results from a fixed set of listings. Each result says why it fits and what it trades off. Vague, conflicting or impossible requests get a clarifying question or the closest real alternatives, never invented listings.
 
+![SpaceScout home](docs/screenshots/home.png)
+
 **Deliverables in this repo**
 
 | Assignment deliverable | Where |
 |---|---|
 | Working prototype (web UI) + run instructions | `app/`, `static/`, this README |
 | Design note (1-2 pages) | [`DESIGN_NOTE.md`](DESIGN_NOTE.md) |
-| Evaluation (21 queries, 9 messy/adversarial) | [`EVALUATION.md`](EVALUATION.md), `eval/` |
+| Evaluation (21 queries, 9 messy/adversarial), rule-based and LLM runs | [`EVALUATION.md`](EVALUATION.md), `eval/` |
 | Reflection (three shipping risks) | [`REFLECTION.md`](REFLECTION.md) |
 
 ## Run it
@@ -29,9 +31,17 @@ The app also runs **without an API key**: it then uses the rule-based parser, an
 ```bash
 pytest                                    # unit + API tests (LLM calls are mocked)
 python -m eval.run_eval --parser rules    # evaluation, offline
-python -m eval.run_eval --parser llm      # evaluation with the LLM parser (needs a key)
+python -m eval.run_eval --parser llm      # evaluation with the LLM parser (needs a key; ~12 min, paced for free-tier rate limits)
 python scripts/generate_listings.py       # regenerate the dataset (deterministic)
 ```
+
+## What it looks like
+
+| Ranked results with reasons and trade-offs | No exact match: honest alternatives |
+|---|---|
+| ![Results](docs/screenshots/results.png) | ![No match](docs/screenshots/no-match.png) |
+
+The **Listings** tab shows the full dataset, the only data search can recommend from. Screenshots were taken with the rule-based parser. The UI uses the Geist typeface, self-hosted under the SIL Open Font License (`static/fonts/OFL.txt`), so it works offline.
 
 ## How it works
 
@@ -136,7 +146,8 @@ app/
     ranker.py             scoring: fit, trust (Bayesian), value, conversion
     explainer.py          fact sheets, template text, LLM phrasing + grounding check
     search.py             orchestration and clarification / no-match logic
-static/                   single-page UI (vanilla JS, no build step)
+static/                   single-page UI (vanilla JS, no build step) + self-hosted fonts
+docs/screenshots/         UI screenshots used in this README
 eval/                     queries.json, run_eval.py, generated results
 tests/                    unit, failure-mode (mocked LLM) and API tests
 scripts/generate_listings.py
@@ -167,3 +178,7 @@ Availability is a weekly pattern (opening days and hours, minus recurring bookin
 - The rule-based parser handles common English phrasings only. It is a fallback, not a substitute: see the Hinglish and typo cases in the evaluation.
 - The ranking weights are hand-set and not learned from booking data, which the prototype doesn't have.
 - No authentication or rate limiting. The API is a local prototype.
+
+## License
+
+MIT, see [`LICENSE`](LICENSE). Geist fonts: SIL Open Font License 1.1.

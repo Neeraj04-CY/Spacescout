@@ -210,6 +210,31 @@ async def main(parser: str, delay: float, cooldown: float, max_retries: int) -> 
     (HERE / f"results_{parser}.json").write_text(json.dumps(raw, indent=2, ensure_ascii=False, default=str), encoding="utf-8")
     print("\n".join(lines[:16]))
     print(f"\nwrote eval/results_{parser}.md")
+    if parser == "llm":
+        update_evaluation_md(lines, rows)
+
+
+def update_evaluation_md(lines: list[str], rows) -> None:
+    """Write the measured LLM summary and failing rows into EVALUATION.md between markers."""
+    doc = HERE.parent / "EVALUATION.md"
+    start, end = "<!-- LLM_RESULTS_START -->", "<!-- LLM_RESULTS_END -->"
+    text = doc.read_text(encoding="utf-8")
+    if start not in text or end not in text:
+        print("EVALUATION.md markers not found; summary not inserted")
+        return
+    summary = lines[lines.index("| Metric | Value |"): lines.index("## Per-query results")]
+    failures = []
+    for case, r, fails, *_ in rows:
+        if fails:
+            used = "rule fallback" if "fallback" in r.trace.get("parser", "") else "LLM"
+            failures.append(f"- **{case['id']}** ({used}): {'; '.join(fails)}")
+    block = [start, "", "_Generated automatically by the evaluation run._", "", *summary,
+             "**Failing rows** (what the checks caught; the full table is in `eval/results_llm.md`):", "",
+             *(failures or ["- None."]), "", end]
+    pre, rest = text.split(start, 1)
+    post = rest.split(end, 1)[1]
+    doc.write_text(pre + "\n".join(block) + post, encoding="utf-8")
+    print("updated EVALUATION.md with the LLM summary")
 
 
 if __name__ == "__main__":
