@@ -16,7 +16,7 @@ from dataclasses import dataclass
 from statistics import mean, median
 
 from app.core.models import Listing, ResolvedQuery, ScoreBreakdown
-from app.core.vocab import FAST_WIFI_MBPS, amenity_label
+from app.core.vocab import FAST_WIFI_MBPS, amenity_phrase
 from app.services.matcher import Evaluation, inr, per_person_hour
 
 WEIGHTS = {"fit": 0.45, "trust": 0.25, "value": 0.15, "conversion": 0.15}
@@ -66,7 +66,7 @@ def soft_signals(l: Listing, q: ResolvedQuery, stats: MarketStats) -> tuple[list
     for a in q.preferred_amenities:
         has = a in l.amenities
         scores.append(1.0 if has else 0.0)
-        (hits if has else misses).append(f"{'Has' if has else 'No'} {amenity_label(a).lower()}")
+        (hits if has else misses).append(f"{'Has' if has else 'No'} {amenity_phrase(a)}")
     if q.min_rating:
         br = bayes_rating(l, stats)
         ok = l.review_count > 0 and l.rating >= q.min_rating

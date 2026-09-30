@@ -40,6 +40,14 @@ def amenity_label(key: str) -> str:
     return AMENITIES[key][0]
 
 
+def amenity_phrase(key: str) -> str:
+    """Label for use mid-sentence: lower-cased unless it starts with an acronym (TV, 24x7)."""
+    label = AMENITIES[key][0]
+    if label[:2].isupper() or label[0].isdigit():
+        return label
+    return label[0].lower() + label[1:]
+
+
 # --------------------------------------------------------------------------- #
 # Space types and noise levels
 # --------------------------------------------------------------------------- #
@@ -108,4 +116,5 @@ TIME_OF_DAY_WINDOWS: dict[str, tuple[str, str]] = {
 }
 
 DEFAULT_DURATION_HOURS = 2.0
+WORKING_HOURS = ("09:00", "19:00")  # searched when a day is given without a time
 WEEKDAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]

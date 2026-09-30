@@ -52,10 +52,12 @@ class AvailabilityResult:
     other_slots: list[tuple[int, int]]  # free blocks outside the requested window (for alternatives)
 
 
-def check_availability(listing: Listing, day: dt.date, ws: int, we: int, duration: int) -> AvailabilityResult:
-    blocks = free_blocks(listing, day)
+def check_availability(listing: Listing, day: dt.date, ws: int, we: int, duration: int, not_before: int = 0) -> AvailabilityResult:
+    blocks = [(max(s, not_before), e) for s, e in free_blocks(listing, day) if e > not_before]
     if not blocks:
-        return AvailabilityResult(False, None, f"Closed on {DAY_NAMES[day.weekday()]}", [])
+        if day.weekday() not in listing.open_days:
+            return AvailabilityResult(False, None, f"Closed on {DAY_NAMES[day.weekday()]}", [])
+        return AvailabilityResult(False, None, "No free time left that day", [])
     for s, e in blocks:
         start, end = max(s, ws), min(e, we)
         if end - start >= duration:

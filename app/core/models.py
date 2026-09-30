@@ -192,6 +192,7 @@ class ResolvedQuery(BaseModel):
     date: Optional[dt.date] = None
     window_start: Optional[int] = None  # minutes from midnight
     window_end: Optional[int] = None
+    not_before: int = 0  # when searching today: no slot may start before this minute
     duration_min: Optional[int] = None
     required_amenities: list[str] = []
     preferred_amenities: list[str] = []

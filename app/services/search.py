@@ -24,7 +24,7 @@ from app.core.models import (
     SearchRequest,
     SearchResponse,
 )
-from app.core.vocab import AREAS, SPACE_TYPES, amenity_label
+from app.core.vocab import AREAS, SPACE_TYPES, amenity_phrase
 from app.services.explainer import FactSheet, explain
 from app.services.llm_client import LLMClient, LLMError
 from app.services.matcher import (
@@ -38,6 +38,7 @@ from app.services.matcher import (
 from app.services.normalize import fmt_minutes, normalize
 from app.services.parser_llm import LLMParser
 from app.services.parser_rules import parse_rules
+from app.services.reconcile import reconcile
 from app.services.ranker import (
     MarketStats,
     general_tradeoffs,
@@ -93,8 +94,12 @@ class SearchService:
         trace: dict = {"request_id": rid, "reference_time": now.isoformat(timespec="minutes"), "llm_calls": [], "timings_ms": {}}
 
         parsed = await self._parse(req.query, req.parser, trace)
+        parsed, notes = reconcile(parsed, req.query)
+        if notes:
+            trace["reconciled"] = notes
         t_parse = time.perf_counter()
         q = normalize(parsed, now)
+        q.assumptions = notes + q.assumptions
         chips = interpretation_chips(q)
 
         resp = dict(request_id=rid, interpretation=chips, parsed=parsed, results=[], total_exact_matches=0)
@@ -291,13 +296,13 @@ def interpretation_chips(q: ResolvedQuery) -> list[Chip]:
             label += f" ({q.duration_min / 60:g}h)"
         chips.append(Chip(kind="hard", label=label))
     for a in q.required_amenities:
-        chips.append(Chip(kind="hard", label=f"Must have {amenity_label(a).lower()}"))
+        chips.append(Chip(kind="hard", label=f"Must have {amenity_phrase(a)}"))
     if q.prefer_quiet:
         chips.append(Chip(kind="soft", label="Prefer quiet"))
     if q.prefer_fast_wifi:
         chips.append(Chip(kind="soft", label="Prefer fast Wi-Fi"))
     for a in q.preferred_amenities:
-        chips.append(Chip(kind="soft", label=f"Prefer {amenity_label(a).lower()}"))
+        chips.append(Chip(kind="soft", label=f"Prefer {amenity_phrase(a)}"))
     if q.min_rating:
         chips.append(Chip(kind="soft", label=f"Prefer rating ≥ {q.min_rating:g}"))
     for a in q.assumptions:

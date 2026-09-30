@@ -69,7 +69,7 @@ def _numbers(s: str) -> set[str]:
 
 def check_grounding(text: str, facts: FactSheet) -> str | None:
     """Return None if `text` only uses facts from the sheet, else the reason for rejection."""
-    if not text or len(text) > 400:
+    if not text or len(text) > 300:
         return "empty or too long"
     ft = facts.text()
     extra_nums = _numbers(text) - _numbers(ft)
@@ -105,11 +105,12 @@ EXPLAIN_SCHEMA: dict[str, Any] = {
     "required": ["items"],
 }
 
-EXPLAIN_PROMPT = """You write short explanations for coworking search results.
-For each item, write ONE or TWO sentences: why it fits, then its main trade-off (if any).
+EXPLAIN_PROMPT = """You write short explanations for coworking search results, shown under each result card.
+For each item write one or two sentences, at most 35 words in total:
+first the strongest reason it fits, then only the single most important trade-off (skip it if there are none).
 Use ONLY the facts given for that item. Do not add amenities, prices, numbers, ratings, distances or adjectives
-that are not in its facts. Keep numbers exactly as written. Do not mention other items. Plain text, no markdown.
-Return JSON: {"items": [{"id": "...", "text": "..."}]}."""
+that are not in its facts. Keep numbers exactly as written. Do not start with "It" and do not mention other items.
+Plain text, no markdown. Return JSON: {"items": [{"id": "...", "text": "..."}]}."""
 
 
 async def explain(

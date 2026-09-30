@@ -11,7 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from app.core.models import Listing, ResolvedQuery
-from app.core.vocab import AREAS, SPACE_TYPES, amenity_label, area_distance_km
+from app.core.vocab import AREAS, SPACE_TYPES, amenity_phrase, area_distance_km
 from app.services.availability import check_availability, fmt_slot
 
 UNIT_LABEL = {
@@ -107,7 +107,9 @@ def evaluate(listing: Listing, q: ResolvedQuery, skip: set[str] | None = None) -
     # Capacity
     if q.party_size and "capacity" not in skip:
         if listing.capacity >= q.party_size:
-            ev.satisfied.append(f"Seats {listing.capacity}, enough for your {q.party_size}")
+            ev.satisfied.append(
+                f"{listing.capacity} seats available" if q.party_size == 1 else f"Seats {listing.capacity}, enough for your {q.party_size}"
+            )
         else:
             short = q.party_size - listing.capacity
             ev.violations.append(
@@ -133,7 +135,7 @@ def evaluate(listing: Listing, q: ResolvedQuery, skip: set[str] | None = None) -
 
     # Availability
     if q.date and q.window_start is not None and q.duration_min and "availability" not in skip:
-        av = check_availability(listing, q.date, q.window_start, q.window_end, q.duration_min)
+        av = check_availability(listing, q.date, q.window_start, q.window_end, q.duration_min, q.not_before)
         if av.ok:
             ev.slot_label = fmt_slot(q.date, av.slot)
             ev.satisfied.append(f"Free {ev.slot_label}")
@@ -148,9 +150,9 @@ def evaluate(listing: Listing, q: ResolvedQuery, skip: set[str] | None = None) -
     if "amenity" not in skip:
         for a in q.required_amenities:
             if a in listing.amenities:
-                ev.satisfied.append(f"Has {amenity_label(a).lower()}")
+                ev.satisfied.append(f"Has {amenity_phrase(a)}")
             else:
-                ev.violations.append(Violation("amenity", 0.8, f"No {amenity_label(a).lower()}"))
+                ev.violations.append(Violation("amenity", 0.8, f"No {amenity_phrase(a)}"))
 
     return ev
 

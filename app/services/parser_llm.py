@@ -60,11 +60,13 @@ You ONLY extract what the user said. You do not recommend, search, or invent any
 Field rules:
 - location_text: the place exactly as the user wrote it (e.g. "Bandra", "near BKC", "Andheri or Powai"). null if none.
 - party_size: number of people. "just me"/"solo" = 1. null if not stated. Never guess.
-- space_type: hot_desk (a desk/seat), meeting_room (meeting/conference/discussion room), private_cabin (private office/cabin). null if unclear.
+- space_type: hot_desk (a desk/seat), meeting_room (meeting/conference/discussion room), private_cabin (private office/cabin).
+  Only set it when the user names the kind of space. Do not infer it from group size or activity ("client pitch", "just me"): use null.
 - budget_amount + budget_unit: "under 600 per person per hour" -> 600, per_person_per_hour. "5k for the day" -> 5000, total_per_day.
   "each"/"per head"/"pp" means per person. No time unit -> per hour. No person unit -> total. null if no budget.
   "free" -> 0.
 - day_kind: today | tomorrow | day_after_tomorrow | weekday (then set weekday, lowercase) | date (then set date as YYYY-MM-DD). null if no day.
+  You do not know today's date. Use "date" only when the user wrote a calendar date ("12 Oct", "12/10"); a weekday name is always "weekday".
 - time_of_day: morning | afternoon | evening | full_day ("all day", "whole day"). start_time/end_time as HH:MM 24h when explicit ("3-6pm" -> 15:00, 18:00).
 - duration_hours: only if the user states a length ("for 3 hours").
 - Amenities must use these keys only:
@@ -72,6 +74,7 @@ Field rules:
   required_amenities: user says must/need/required/mandatory/"has to have".
   preferred_amenities: ideally/preferably/nice to have/if possible, or mentioned without insistence.
 - prefer_quiet: quiet, calm, silent, focus, peaceful. prefer_fast_wifi: fast/good/strong/high-speed internet or wifi.
+  Taking calls usually means preferring phone_booth; video calls / Zoom / Meet usually means preferring video_conferencing.
 - min_rating: only if the user asks for a rating ("4+ stars" -> 4).
 - unsupported_requests: short phrases for anything the user wants that is NOT covered above (e.g. "sea view", "pet friendly", "gym").
 - off_topic: true only if the message is not about finding a workspace at all.

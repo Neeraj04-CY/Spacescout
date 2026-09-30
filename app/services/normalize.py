@@ -13,6 +13,7 @@ import re
 
 from app.core.models import ParsedQuery, ResolvedQuery
 from app.core.vocab import (
+    WORKING_HOURS,
     AREAS,
     DEFAULT_DURATION_HOURS,
     NEARBY_KM,
@@ -143,17 +144,27 @@ def normalize(p: ParsedQuery, now: dt.datetime) -> ResolvedQuery:
         assumptions.append(f"No day given, assumed {'today' if day == now.date() else 'tomorrow'}")
 
     if day is not None and ws is None:
-        ws, we = 0, 24 * 60
+        # No time given: search working hours rather than the whole 24h day,
+        # so a 24x7 space isn't offered at 00:00.
+        ws, we = _minutes(WORKING_HOURS[0]), _minutes(WORKING_HOURS[1])
         if not duration:
             duration = int(DEFAULT_DURATION_HOURS * 60)
-            assumptions.append(f"No time given, looking for any {DEFAULT_DURATION_HOURS:g}-hour slot that day")
+            assumptions.append(f"No time given, looking for a {DEFAULT_DURATION_HOURS:g}-hour slot between {WORKING_HOURS[0]} and {WORKING_HOURS[1]}")
 
+    not_before = 0
     if day is not None and day == now.date() and ws is not None:
         now_min = now.hour * 60 + now.minute
         rounded = ((now_min + 29) // 30) * 30
-        if ws < rounded:
+        if we - max(ws, rounded) < (duration or 0):
+            # The requested window has already passed today: move it to tomorrow.
+            day = day + dt.timedelta(days=1)
+            assumptions.append(f"That time has already passed today, so showing {day:%a %d %b} instead")
+        elif ws < rounded:
             ws = rounded
+            not_before = rounded
             assumptions.append(f"Only considering slots from {fmt_minutes(ws)} today")
+        else:
+            not_before = rounded
 
     # ---- budget ------------------------------------------------------------
     unit = p.budget_unit
@@ -175,6 +186,7 @@ def normalize(p: ParsedQuery, now: dt.datetime) -> ResolvedQuery:
         date=day,
         window_start=ws,
         window_end=we,
+        not_before=not_before,
         duration_min=duration if day is not None else None,
         required_amenities=p.required_amenities,
         preferred_amenities=p.preferred_amenities,

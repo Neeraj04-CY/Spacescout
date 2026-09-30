@@ -169,7 +169,7 @@
     "status": "partial",
     "parser": "rules (no LLM key configured)",
     "fallback_reason": null,
-    "latency_ms": 2,
+    "latency_ms": 1,
     "llm_calls": [],
     "parsed": {
       "location_text": "near lower parel",
@@ -210,7 +210,7 @@
     "status": "partial",
     "parser": "rules (no LLM key configured)",
     "fallback_reason": null,
-    "latency_ms": 1,
+    "latency_ms": 2,
     "llm_calls": [],
     "parsed": {
       "location_text": "khar",
@@ -250,7 +250,7 @@
     "status": "no_exact_match",
     "parser": "rules (no LLM key configured)",
     "fallback_reason": null,
-    "latency_ms": 5,
+    "latency_ms": 3,
     "llm_calls": [],
     "parsed": {
       "location_text": "fort",
@@ -530,7 +530,7 @@
     "status": "no_exact_match",
     "parser": "rules (no LLM key configured)",
     "fallback_reason": null,
-    "latency_ms": 1,
+    "latency_ms": 2,
     "llm_calls": [],
     "parsed": {
       "location_text": "bandra",
@@ -569,7 +569,7 @@
     "status": "no_exact_match",
     "parser": "rules (no LLM key configured)",
     "fallback_reason": null,
-    "latency_ms": 3,
+    "latency_ms": 5,
     "llm_calls": [],
     "parsed": {
       "location_text": "juhu",
@@ -643,7 +643,7 @@
     "status": "no_exact_match",
     "parser": "rules (no LLM key configured)",
     "fallback_reason": null,
-    "latency_ms": 1,
+    "latency_ms": 2,
     "llm_calls": [],
     "parsed": {
       "location_text": "bandra",
@@ -682,7 +682,7 @@
     "status": "partial",
     "parser": "rules (no LLM key configured)",
     "fallback_reason": null,
-    "latency_ms": 1,
+    "latency_ms": 2,
     "llm_calls": [],
     "parsed": {
       "location_text": "andheri",
@@ -724,7 +724,7 @@
     "status": "ok",
     "parser": "rules (no LLM key configured)",
     "fallback_reason": null,
-    "latency_ms": 1,
+    "latency_ms": 2,
     "llm_calls": [],
     "parsed": {
       "location_text": "bandraa",
@@ -766,7 +766,7 @@
     "status": "no_exact_match",
     "parser": "rules (no LLM key configured)",
     "fallback_reason": null,
-    "latency_ms": 2,
+    "latency_ms": 3,
     "llm_calls": [],
     "parsed": {
       "location_text": "powai",
@@ -802,7 +802,7 @@
     "status": "needs_clarification",
     "parser": "rules (no LLM key configured)",
     "fallback_reason": null,
-    "latency_ms": 0,
+    "latency_ms": 1,
     "llm_calls": [],
     "parsed": {
       "location_text": null,
