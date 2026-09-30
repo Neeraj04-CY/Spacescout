@@ -11,7 +11,7 @@ parse (LLM, rules fallback) → normalise (code) → decide: search or clarify (
 
 The core decision is **what the LLM is allowed to do**. It turns free text into a fixed schema. It never sees the listings, never computes anything, and never decides what is shown. That one rule is what makes the honesty requirement enforceable, not just hoped for.
 
-This is not an agent. The flow is known in advance and every step runs once. A loop where a model decides what to do next would add latency, cost and failure modes without adding capability for this problem.
+This is deliberately not an agent: the flow is fixed and each step runs once, so an agent loop would add latency and failure modes without adding capability.
 
 ## 2. Splitting work between the LLM and regular code
 
@@ -62,9 +62,5 @@ Today every listing is evaluated in Python on each request. That is fine for 40 
 3. **Relaxation as facet counts.** "What if budget were dropped?" becomes a `COUNT` per constraint in one query, or a search-engine facet (OpenSearch/Elasticsearch) instead of re-running the matcher.
 4. **Two-stage ranking.** Rules and SQL retrieve roughly the top 500. A learned ranker then re-orders them, trained on logged searches, clicks and completed bookings, which is where conversion signal actually comes from. The hand-set weights become features and a baseline.
 5. **Embeddings earn a place.** With real descriptions and reviews, preferences like "good for podcast recording" or "feels premium" can't be mapped to 15 amenity keys. Embed listing text into a vector index (pgvector is enough at this size) and use semantic similarity as one ranking feature, not as a filter, so it can never override a hard constraint.
-6. **LLM cost stays flat.** The LLM never sees listings, so its cost doesn't grow with inventory. Explanations are generated only for the top five. Add per-user rate limits, a provider fallback chain and a circuit breaker.
-7. **Evaluation becomes continuous.** Sample production queries into a labelled set, run it on every prompt or model change in CI, and track zero-result rate, clarification rate and search-to-booking conversion.
-
-## 6. What I would do next with more time
-
-Let users edit the "Understood as" chips directly (for example, click "≤ ₹600/person/hr" and change it), which fixes misparses without retyping. Add multi-turn refinement, so an answer to the clarifying question is merged into the previous request. Run the evaluation with 2–3 models to compare parse accuracy against latency, using the harness that already exists.
+6. **LLM cost stays flat.** The LLM never sees listings, so its cost doesn't grow with inventory. Add rate limits and a provider fallback chain.
+7. **Continuous evaluation.** Run a labelled sample of production queries in CI on every prompt or model change. Track zero-result rate and search-to-booking conversion.
