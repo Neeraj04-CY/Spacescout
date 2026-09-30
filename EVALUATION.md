@@ -117,14 +117,14 @@ On 30 Sep 2026, around 22:25 IST, the app was used through its web UI on a runni
 |---|---|---|
 | "on sunday" parsed as the calendar date 2026-10-01 (a Thursday) | The model doesn't know today's date, so it invented one and searched the wrong day | `reconcile.py`: a calendar date needs a date in the text; otherwise the weekday or relative day the user wrote is used |
 | "max 1000 rupees total" and "1500 tak ka budget" read as per **day** | A per-day budget hides rooms that fit the real hourly budget | A per-day or per-person unit needs evidence in the text; otherwise total per hour, shown as an assumption. This also fixes S3, S6 and S12 from the first LLM run; S6 had doubled the budget |
-| "with a whiteboard" treated as a must-have (S9) | A must-have silently removes listings | Must-haves need a "must/need/chahiye" cue; otherwise they become preferences |
+| "with a whiteboard" treated as a must-have (S9) | Looked over-strict | **Deliberately kept.** Demoting must-haves was tried, but on the live server it reported a room without parking as a match for "anything with parking". An over-strict must-have is safer: when nothing has it, the no-match path shows the closest listings with the missing amenity stated. |
 | "client pitch" → meeting room; "just me" → hot desk | An inferred space type hides valid cabins and desks | Space type is kept only if the user named one |
 | "this morning" typed at 22:26 produced a 22:30–12:00 window and nonsense reasons | Any evening demo would hit this | A window that has passed today moves to tomorrow, with a note; today's slots never start in the past |
 | A day without a time offered 24x7 spaces at 00:00–02:00 | Absurd suggestion | A day without a time searches working hours, 09:00–19:00 |
 
 The rule behind all of these: **the LLM may relax nothing and tighten nothing the user didn't say.** Any hard constraint it adds without evidence in the text is relaxed and shown to the user as an assumption.
 
-Caveat: some of these fixes also change results for queries in the evaluation set (S3, S6, S9, S12). A re-run after them is therefore partly measured on the queries that motivated them. The unseen live queries above are the fairer check. The LLM results block records the code version it was measured on.
+Caveat: some of these fixes also change results for queries in the evaluation set (S3, S6, S12). A re-run after them is therefore partly measured on the queries that motivated them. The unseen live queries above are the fairer check. The LLM results block records the code version it was measured on.
 
 ## What the evaluation does not cover
 

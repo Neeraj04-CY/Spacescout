@@ -42,13 +42,10 @@ def test_per_person_unit_needs_evidence():
     assert p.budget_unit == "per_person_per_hour"
 
 
-def test_required_amenity_without_must_is_a_preference():
-    p, notes = reconcile(ParsedQuery(required_amenities=["whiteboard"]), "meeting room for 4 in Andheri with a whiteboard")
-    assert p.required_amenities == [] and p.preferred_amenities == ["whiteboard"]
-    p, _ = reconcile(ParsedQuery(required_amenities=["projector"]), "board room for 10, must have a projector")
-    assert p.required_amenities == ["projector"]
-    p, _ = reconcile(ParsedQuery(required_amenities=["parking"]), "Andheri mein parking chahiye")
-    assert p.required_amenities == ["parking"]
+def test_required_amenity_is_kept_so_misses_are_explicit():
+    # Live: demoting "anything with parking" to a preference reported a no-parking room as a match.
+    p, notes = reconcile(ParsedQuery(required_amenities=["parking"]), "anything with parking in Vashi on sunday")
+    assert p.required_amenities == ["parking"] and not notes
 
 
 def test_inferred_space_type_is_dropped():

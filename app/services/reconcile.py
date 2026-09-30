@@ -17,7 +17,7 @@ from __future__ import annotations
 import re
 
 from app.core.models import ParsedQuery
-from app.core.vocab import AMENITIES, WEEKDAYS
+from app.core.vocab import WEEKDAYS
 
 _DAY_UNIT = re.compile(r"(per[- ]day|\ba day\b|for the day|/day|\bdaily\b|full[- ]day|all[- ]day|whole[- ]day|\bper din\b|\bdin ka\b|day rate|day pass)")
 _PERSON_UNIT = re.compile(
@@ -31,10 +31,6 @@ _EXPLICIT_DATE = re.compile(
 _TODAY = re.compile(r"\b(today|tonight|this (morning|afternoon|evening)|aaj|abhi|right now)\b")
 _TOMORROW = re.compile(r"\b(tomorrow|tmrw|tmr|tomorow|kal)\b")
 _DAY_AFTER = re.compile(r"\b(day after tomorrow|parso|parson)\b")
-_REQUIRED_CUES = re.compile(
-    r"\b(must|need|needs|needed|required|require|requires|mandatory|essential|has to have|have to have|non[- ]negotiable"
-    r"|chahiye|zaroori|jaruri|hona hi)\b"
-)
 _SPACE_EVIDENCE = {
     "hot_desk": re.compile(r"\b(desk|desks|hot[- ]desk|seat|seats|workstation|coworking desk)\b"),
     "meeting_room": re.compile(r"\b(meeting|conference|board ?room|discussion room|meeting space|huddle room|room)\b"),
@@ -47,15 +43,6 @@ def _weekday_in(text: str) -> str | None:
         if re.search(rf"\b({wd}|{wd[:3]})\b", text):
             return wd
     return None
-
-
-def _clause_around(text: str, term: str) -> str | None:
-    m = re.search(rf"\b{re.escape(term)}\b", text)
-    if not m:
-        return None
-    start = max(text.rfind(ch, 0, m.start()) for ch in ",;.") + 1
-    ends = [i for i in (text.find(ch, m.end()) for ch in ",;.") if i != -1]
-    return text[start: min(ends) if ends else len(text)]
 
 
 def reconcile(parsed: ParsedQuery, query: str) -> tuple[ParsedQuery, list[str]]:
@@ -101,23 +88,10 @@ def reconcile(parsed: ParsedQuery, query: str) -> tuple[ParsedQuery, list[str]]:
             p.day_kind, p.weekday = None, None
             notes.append("Couldn't tell which day you meant, so availability isn't filtered by date")
 
-    # ---- required amenities need a "must/need" cue near them ---------------
-    demoted = []
-    for key in list(p.required_amenities):
-        label, syns = AMENITIES[key]
-        clause = None
-        for term in [*syns, label.lower()]:
-            clause = _clause_around(t, term)
-            if clause:
-                break
-        evidence = clause if clause is not None else t
-        if not _REQUIRED_CUES.search(evidence):
-            p.required_amenities.remove(key)
-            if key not in p.preferred_amenities:
-                p.preferred_amenities.append(key)
-            demoted.append(label.lower() if not label[:2].isupper() else label)
-    if demoted:
-        notes.append(f"Treated {', '.join(demoted)} as a preference, not a must-have")
+    # Required amenities are left as the parser read them. An over-strict must-have
+    # is not hidden from the user: when nothing has it, the no-match path shows the
+    # closest listings with "No <amenity>" as the stated miss. Demoting it instead
+    # would report a listing without parking as a match for "anything with parking".
 
     # ---- space type only if the user named one ------------------------------
     if p.space_type and not _SPACE_EVIDENCE[p.space_type].search(t):
