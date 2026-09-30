@@ -228,7 +228,12 @@ def update_evaluation_md(lines: list[str], rows) -> None:
         if fails:
             used = "rule fallback" if "fallback" in r.trace.get("parser", "") else "LLM"
             failures.append(f"- **{case['id']}** ({used}): {'; '.join(fails)}")
-    block = [start, "", "_Generated automatically by the evaluation run._", "", *summary,
+    try:
+        import subprocess
+        version = subprocess.run(["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True, cwd=HERE.parent, timeout=5).stdout.strip() or "unknown"
+    except Exception:
+        version = "unknown"
+    block = [start, "", f"_Generated automatically by the evaluation run on code version `{version}`._", "", *summary,
              "**Failing rows** (what the checks caught; the full table is in `eval/results_llm.md`):", "",
              *(failures or ["- None."]), "", end]
     pre, rest = text.split(start, 1)
