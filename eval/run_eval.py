@@ -7,6 +7,12 @@ honour every hard constraint, and that results are grounded in the dataset).
 Usage:
     python -m eval.run_eval --parser rules          # offline, no API key needed
     python -m eval.run_eval --parser llm            # needs LLM_API_KEY / GROQ_API_KEY
+
+Free-tier LLM plans have low per-minute token limits (Groq free tier: 8,000 TPM
+for gpt-oss-20b), and one search uses two LLM calls. In --parser llm mode the
+runner therefore paces queries (--delay) and, if a query was rate-limited into
+the rule-based fallback, waits (--cooldown) and re-runs it. Rows that still fell
+back are marked, because they measure the rule parser, not the LLM.
 Writes eval/results_<parser>.md and eval/results_<parser>.json.
 """
 
@@ -118,7 +124,7 @@ def check(case: dict, r: SearchResponse, data: dict) -> tuple[list[str], int, in
     return fails, ok_fields, total_fields, misses
 
 
-async def main(parser: str) -> None:
+async def main(parser: str, delay: float, cooldown: float, max_retries: int) -> None:
     settings: Settings = get_settings()
     if parser == "llm" and not settings.llm_enabled:
         raise SystemExit("Set LLM_API_KEY (or GROQ_API_KEY) to run the LLM evaluation.")
@@ -128,11 +134,23 @@ async def main(parser: str) -> None:
 
     rows, raw = [], []
     ok_fields = total_fields = 0
-    latencies, fallbacks, llm_tokens = [], 0, 0
-    for case in cases:
-        t = time.perf_counter()
-        r = await svc.search(SearchRequest(query=case["query"], reference_time=REFERENCE_TIME, parser=parser))
-        latencies.append((time.perf_counter() - t) * 1000)
+    latencies, fallbacks, llm_tokens, rate_limit_retries = [], 0, 0, 0
+    for i, case in enumerate(cases):
+        if i and delay:
+            await asyncio.sleep(delay)
+        for attempt in range(max_retries + 1):
+            t = time.perf_counter()
+            r = await svc.search(SearchRequest(query=case["query"], reference_time=REFERENCE_TIME, parser=parser))
+            elapsed = (time.perf_counter() - t) * 1000
+            reason = r.trace.get("fallback_reason", "")
+            if parser == "llm" and "429" in reason and attempt < max_retries:
+                rate_limit_retries += 1
+                print(f"{case['id']}: rate-limited, cooling down {cooldown:.0f}s before retrying")
+                await asyncio.sleep(cooldown)
+                continue
+            break
+        latencies.append(elapsed)
+        print(f"{case['id']}: {r.trace.get('parser')} {r.status} ({elapsed:.0f} ms)")
         fails, okf, totf, _ = check(case, r, data)
         ok_fields += okf
         total_fields += totf
@@ -141,6 +159,8 @@ async def main(parser: str) -> None:
         top = ", ".join(f"{it.listing.id}{MARK[it.match]}" for it in r.results[:3]) or "—"
         rows.append((case, r, fails, okf, totf, top))
         raw.append({"id": case["id"], "query": case["query"], "status": r.status, "parser": r.trace.get("parser"),
+                    "fallback_reason": r.trace.get("fallback_reason"), "latency_ms": round(elapsed),
+                    "llm_calls": [{k: c.get(k) for k in ("purpose", "mode", "attempts", "latency_ms", "outcome", "errors")} for c in r.trace.get("llm_calls", [])],
                     "parsed": r.parsed.model_dump(), "results": [it.listing.id for it in r.results], "failures": fails,
                     "message": r.message, "question": r.clarifying_question})
 
@@ -166,20 +186,26 @@ async def main(parser: str) -> None:
         *[f"| {cat} queries passing | {p}/{n} |" for cat, (p, n) in by_cat.items()],
         f"| Parsed fields correct | {ok_fields}/{total_fields} ({100 * ok_fields / max(total_fields, 1):.0f}%) |",
         f"| Grounding violations (result not in dataset, or LLM text with unsupported facts) | {grounding_fail} |",
+        *([f"| Queries actually parsed by the LLM | {len(rows) - fallbacks}/{len(rows)} |",
+           f"| Rate-limit cool-downs used | {rate_limit_retries} |"] if parser != "rules" else []),
         f"| LLM parser fallbacks to rules | {fallbacks} |",
         f"| Latency per query, median / max (ms) | {statistics.median(latencies):.0f} / {max(latencies):.0f} |",
         *([f"| Total LLM tokens (all queries) | {llm_tokens} |"] if parser != "rules" else []),
         "",
+        *([f"> **Warning:** {fallbacks} quer{'y' if fallbacks == 1 else 'ies'} fell back to the rule parser. "
+           "Those rows measure the rule parser, not the LLM. Re-run with a longer `--delay`.", ""]
+          if parser == "llm" and fallbacks else []),
         "## Per-query results",
         "",
         "`~` = alternative (misses at least one hard constraint), `*` = untailored suggestion shown with a clarifying question. Parsed = expected fields extracted correctly.",
         "",
-        "| ID | Type | Query | Status | Parsed | Top results | Pass | What failed |",
-        "|---|---|---|---|---|---|---|---|",
+        "| ID | Type | Query | Parser | Status | Parsed | Top results | Pass | What failed |",
+        "|---|---|---|---|---|---|---|---|---|",
     ]
     for case, r, fails, okf, totf, top in rows:
         q = case["query"].replace("|", "\\|")
-        lines.append(f"| {case['id']} | {case['category']} | {q} | {r.status} | {okf}/{totf} | {top} | {'✅' if not fails else '❌'} | {'; '.join(fails) or ''} |")
+        used = "rules (fallback)" if "fallback" in r.trace.get("parser", "") else ("llm" if r.trace.get("parser", "").startswith("llm") else "rules")
+        lines.append(f"| {case['id']} | {case['category']} | {q} | {used} | {r.status} | {okf}/{totf} | {top} | {'✅' if not fails else '❌'} | {'; '.join(fails) or ''} |")
     (HERE / f"results_{parser}.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     (HERE / f"results_{parser}.json").write_text(json.dumps(raw, indent=2, ensure_ascii=False, default=str), encoding="utf-8")
     print("\n".join(lines[:16]))
@@ -189,4 +215,9 @@ async def main(parser: str) -> None:
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--parser", choices=["rules", "llm", "auto"], default="auto")
-    asyncio.run(main(ap.parse_args().parser))
+    ap.add_argument("--delay", type=float, default=None, help="seconds between queries (default: 30 for llm, 0 otherwise)")
+    ap.add_argument("--cooldown", type=float, default=65.0, help="seconds to wait after a rate-limited query before retrying it")
+    ap.add_argument("--max-retries", type=int, default=2, help="re-runs per query after a rate-limit fallback")
+    a = ap.parse_args()
+    d = a.delay if a.delay is not None else (30.0 if a.parser == "llm" else 0.0)
+    asyncio.run(main(a.parser, d, a.cooldown, a.max_retries))
